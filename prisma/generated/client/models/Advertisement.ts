@@ -30,12 +30,14 @@ export type AdvertisementAvgAggregateOutputType = {
   id: number | null
   price: number | null
   categoryId: number | null
+  likes: number | null
 }
 
 export type AdvertisementSumAggregateOutputType = {
   id: number | null
   price: number | null
   categoryId: number | null
+  likes: number | null
 }
 
 export type AdvertisementMinAggregateOutputType = {
@@ -43,10 +45,11 @@ export type AdvertisementMinAggregateOutputType = {
   title: string | null
   description: string | null
   price: number | null
-  location: string | null
   imageUrl: string | null
   userId: string | null
   categoryId: number | null
+  location: string | null
+  likes: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,10 +59,11 @@ export type AdvertisementMaxAggregateOutputType = {
   title: string | null
   description: string | null
   price: number | null
-  location: string | null
   imageUrl: string | null
   userId: string | null
   categoryId: number | null
+  location: string | null
+  likes: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -69,10 +73,11 @@ export type AdvertisementCountAggregateOutputType = {
   title: number
   description: number
   price: number
-  location: number
   imageUrl: number
   userId: number
   categoryId: number
+  location: number
+  likes: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -83,12 +88,14 @@ export type AdvertisementAvgAggregateInputType = {
   id?: true
   price?: true
   categoryId?: true
+  likes?: true
 }
 
 export type AdvertisementSumAggregateInputType = {
   id?: true
   price?: true
   categoryId?: true
+  likes?: true
 }
 
 export type AdvertisementMinAggregateInputType = {
@@ -96,10 +103,11 @@ export type AdvertisementMinAggregateInputType = {
   title?: true
   description?: true
   price?: true
-  location?: true
   imageUrl?: true
   userId?: true
   categoryId?: true
+  location?: true
+  likes?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -109,10 +117,11 @@ export type AdvertisementMaxAggregateInputType = {
   title?: true
   description?: true
   price?: true
-  location?: true
   imageUrl?: true
   userId?: true
   categoryId?: true
+  location?: true
+  likes?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,10 +131,11 @@ export type AdvertisementCountAggregateInputType = {
   title?: true
   description?: true
   price?: true
-  location?: true
   imageUrl?: true
   userId?: true
   categoryId?: true
+  location?: true
+  likes?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -222,10 +232,11 @@ export type AdvertisementGroupByOutputType = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
   userId: string
   categoryId: number
+  location: string
+  likes: number
   createdAt: Date
   updatedAt: Date
   _count: AdvertisementCountAggregateOutputType | null
@@ -258,15 +269,15 @@ export type AdvertisementWhereInput = {
   title?: Prisma.StringFilter<"Advertisement"> | string
   description?: Prisma.StringFilter<"Advertisement"> | string
   price?: Prisma.IntFilter<"Advertisement"> | number
-  location?: Prisma.StringFilter<"Advertisement"> | string
   imageUrl?: Prisma.StringFilter<"Advertisement"> | string
   userId?: Prisma.StringFilter<"Advertisement"> | string
   categoryId?: Prisma.IntFilter<"Advertisement"> | number
+  location?: Prisma.StringFilter<"Advertisement"> | string
+  likes?: Prisma.IntFilter<"Advertisement"> | number
   createdAt?: Prisma.DateTimeFilter<"Advertisement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Advertisement"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
-  favorites?: Prisma.FavoriteListRelationFilter
 }
 
 export type AdvertisementOrderByWithRelationInput = {
@@ -274,15 +285,15 @@ export type AdvertisementOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   category?: Prisma.CategoryOrderByWithRelationInput
-  favorites?: Prisma.FavoriteOrderByRelationAggregateInput
 }
 
 export type AdvertisementWhereUniqueInput = Prisma.AtLeast<{
@@ -293,15 +304,15 @@ export type AdvertisementWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Advertisement"> | string
   description?: Prisma.StringFilter<"Advertisement"> | string
   price?: Prisma.IntFilter<"Advertisement"> | number
-  location?: Prisma.StringFilter<"Advertisement"> | string
   imageUrl?: Prisma.StringFilter<"Advertisement"> | string
   userId?: Prisma.StringFilter<"Advertisement"> | string
   categoryId?: Prisma.IntFilter<"Advertisement"> | number
+  location?: Prisma.StringFilter<"Advertisement"> | string
+  likes?: Prisma.IntFilter<"Advertisement"> | number
   createdAt?: Prisma.DateTimeFilter<"Advertisement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Advertisement"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
-  favorites?: Prisma.FavoriteListRelationFilter
 }, "id">
 
 export type AdvertisementOrderByWithAggregationInput = {
@@ -309,10 +320,11 @@ export type AdvertisementOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.AdvertisementCountOrderByAggregateInput
@@ -330,10 +342,11 @@ export type AdvertisementScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Advertisement"> | string
   description?: Prisma.StringWithAggregatesFilter<"Advertisement"> | string
   price?: Prisma.IntWithAggregatesFilter<"Advertisement"> | number
-  location?: Prisma.StringWithAggregatesFilter<"Advertisement"> | string
   imageUrl?: Prisma.StringWithAggregatesFilter<"Advertisement"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Advertisement"> | string
   categoryId?: Prisma.IntWithAggregatesFilter<"Advertisement"> | number
+  location?: Prisma.StringWithAggregatesFilter<"Advertisement"> | string
+  likes?: Prisma.IntWithAggregatesFilter<"Advertisement"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Advertisement"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Advertisement"> | Date | string
 }
@@ -342,13 +355,13 @@ export type AdvertisementCreateInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAdsInput
   category: Prisma.CategoryCreateNestedOneWithoutAdsInput
-  favorites?: Prisma.FavoriteCreateNestedManyWithoutAdvertisementInput
 }
 
 export type AdvertisementUncheckedCreateInput = {
@@ -356,26 +369,26 @@ export type AdvertisementUncheckedCreateInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
   userId: string
   categoryId: number
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutAdvertisementInput
 }
 
 export type AdvertisementUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAdsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutAdsNestedInput
-  favorites?: Prisma.FavoriteUpdateManyWithoutAdvertisementNestedInput
 }
 
 export type AdvertisementUncheckedUpdateInput = {
@@ -383,13 +396,13 @@ export type AdvertisementUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutAdvertisementNestedInput
 }
 
 export type AdvertisementCreateManyInput = {
@@ -397,10 +410,11 @@ export type AdvertisementCreateManyInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
   userId: string
   categoryId: number
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -409,8 +423,9 @@ export type AdvertisementUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -420,10 +435,11 @@ export type AdvertisementUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -433,10 +449,11 @@ export type AdvertisementCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -445,6 +462,7 @@ export type AdvertisementAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   price?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
 }
 
 export type AdvertisementMaxOrderByAggregateInput = {
@@ -452,10 +470,11 @@ export type AdvertisementMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -465,10 +484,11 @@ export type AdvertisementMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -477,6 +497,7 @@ export type AdvertisementSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   price?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  likes?: Prisma.SortOrder
 }
 
 export type AdvertisementListRelationFilter = {
@@ -487,11 +508,6 @@ export type AdvertisementListRelationFilter = {
 
 export type AdvertisementOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type AdvertisementScalarRelationFilter = {
-  is?: Prisma.AdvertisementWhereInput
-  isNot?: Prisma.AdvertisementWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -594,30 +610,16 @@ export type AdvertisementUncheckedUpdateManyWithoutCategoryNestedInput = {
   deleteMany?: Prisma.AdvertisementScalarWhereInput | Prisma.AdvertisementScalarWhereInput[]
 }
 
-export type AdvertisementCreateNestedOneWithoutFavoritesInput = {
-  create?: Prisma.XOR<Prisma.AdvertisementCreateWithoutFavoritesInput, Prisma.AdvertisementUncheckedCreateWithoutFavoritesInput>
-  connectOrCreate?: Prisma.AdvertisementCreateOrConnectWithoutFavoritesInput
-  connect?: Prisma.AdvertisementWhereUniqueInput
-}
-
-export type AdvertisementUpdateOneRequiredWithoutFavoritesNestedInput = {
-  create?: Prisma.XOR<Prisma.AdvertisementCreateWithoutFavoritesInput, Prisma.AdvertisementUncheckedCreateWithoutFavoritesInput>
-  connectOrCreate?: Prisma.AdvertisementCreateOrConnectWithoutFavoritesInput
-  upsert?: Prisma.AdvertisementUpsertWithoutFavoritesInput
-  connect?: Prisma.AdvertisementWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AdvertisementUpdateToOneWithWhereWithoutFavoritesInput, Prisma.AdvertisementUpdateWithoutFavoritesInput>, Prisma.AdvertisementUncheckedUpdateWithoutFavoritesInput>
-}
-
 export type AdvertisementCreateWithoutUserInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   category: Prisma.CategoryCreateNestedOneWithoutAdsInput
-  favorites?: Prisma.FavoriteCreateNestedManyWithoutAdvertisementInput
 }
 
 export type AdvertisementUncheckedCreateWithoutUserInput = {
@@ -625,12 +627,12 @@ export type AdvertisementUncheckedCreateWithoutUserInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
   categoryId: number
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutAdvertisementInput
 }
 
 export type AdvertisementCreateOrConnectWithoutUserInput = {
@@ -667,10 +669,11 @@ export type AdvertisementScalarWhereInput = {
   title?: Prisma.StringFilter<"Advertisement"> | string
   description?: Prisma.StringFilter<"Advertisement"> | string
   price?: Prisma.IntFilter<"Advertisement"> | number
-  location?: Prisma.StringFilter<"Advertisement"> | string
   imageUrl?: Prisma.StringFilter<"Advertisement"> | string
   userId?: Prisma.StringFilter<"Advertisement"> | string
   categoryId?: Prisma.IntFilter<"Advertisement"> | number
+  location?: Prisma.StringFilter<"Advertisement"> | string
+  likes?: Prisma.IntFilter<"Advertisement"> | number
   createdAt?: Prisma.DateTimeFilter<"Advertisement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Advertisement"> | Date | string
 }
@@ -679,12 +682,12 @@ export type AdvertisementCreateWithoutCategoryInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAdsInput
-  favorites?: Prisma.FavoriteCreateNestedManyWithoutAdvertisementInput
 }
 
 export type AdvertisementUncheckedCreateWithoutCategoryInput = {
@@ -692,12 +695,12 @@ export type AdvertisementUncheckedCreateWithoutCategoryInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
   userId: string
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutAdvertisementInput
 }
 
 export type AdvertisementCreateOrConnectWithoutCategoryInput = {
@@ -726,80 +729,15 @@ export type AdvertisementUpdateManyWithWhereWithoutCategoryInput = {
   data: Prisma.XOR<Prisma.AdvertisementUpdateManyMutationInput, Prisma.AdvertisementUncheckedUpdateManyWithoutCategoryInput>
 }
 
-export type AdvertisementCreateWithoutFavoritesInput = {
-  title: string
-  description: string
-  price: number
-  location: string
-  imageUrl: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutAdsInput
-  category: Prisma.CategoryCreateNestedOneWithoutAdsInput
-}
-
-export type AdvertisementUncheckedCreateWithoutFavoritesInput = {
-  id?: number
-  title: string
-  description: string
-  price: number
-  location: string
-  imageUrl: string
-  userId: string
-  categoryId: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AdvertisementCreateOrConnectWithoutFavoritesInput = {
-  where: Prisma.AdvertisementWhereUniqueInput
-  create: Prisma.XOR<Prisma.AdvertisementCreateWithoutFavoritesInput, Prisma.AdvertisementUncheckedCreateWithoutFavoritesInput>
-}
-
-export type AdvertisementUpsertWithoutFavoritesInput = {
-  update: Prisma.XOR<Prisma.AdvertisementUpdateWithoutFavoritesInput, Prisma.AdvertisementUncheckedUpdateWithoutFavoritesInput>
-  create: Prisma.XOR<Prisma.AdvertisementCreateWithoutFavoritesInput, Prisma.AdvertisementUncheckedCreateWithoutFavoritesInput>
-  where?: Prisma.AdvertisementWhereInput
-}
-
-export type AdvertisementUpdateToOneWithWhereWithoutFavoritesInput = {
-  where?: Prisma.AdvertisementWhereInput
-  data: Prisma.XOR<Prisma.AdvertisementUpdateWithoutFavoritesInput, Prisma.AdvertisementUncheckedUpdateWithoutFavoritesInput>
-}
-
-export type AdvertisementUpdateWithoutFavoritesInput = {
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutAdsNestedInput
-  category?: Prisma.CategoryUpdateOneRequiredWithoutAdsNestedInput
-}
-
-export type AdvertisementUncheckedUpdateWithoutFavoritesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type AdvertisementCreateManyUserInput = {
   id?: number
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
   categoryId: number
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -808,12 +746,12 @@ export type AdvertisementUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneRequiredWithoutAdsNestedInput
-  favorites?: Prisma.FavoriteUpdateManyWithoutAdvertisementNestedInput
 }
 
 export type AdvertisementUncheckedUpdateWithoutUserInput = {
@@ -821,12 +759,12 @@ export type AdvertisementUncheckedUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutAdvertisementNestedInput
 }
 
 export type AdvertisementUncheckedUpdateManyWithoutUserInput = {
@@ -834,9 +772,10 @@ export type AdvertisementUncheckedUpdateManyWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -846,9 +785,10 @@ export type AdvertisementCreateManyCategoryInput = {
   title: string
   description: string
   price: number
-  location: string
   imageUrl: string
   userId: string
+  location: string
+  likes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -857,12 +797,12 @@ export type AdvertisementUpdateWithoutCategoryInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAdsNestedInput
-  favorites?: Prisma.FavoriteUpdateManyWithoutAdvertisementNestedInput
 }
 
 export type AdvertisementUncheckedUpdateWithoutCategoryInput = {
@@ -870,12 +810,12 @@ export type AdvertisementUncheckedUpdateWithoutCategoryInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutAdvertisementNestedInput
 }
 
 export type AdvertisementUncheckedUpdateManyWithoutCategoryInput = {
@@ -883,42 +823,14 @@ export type AdvertisementUncheckedUpdateManyWithoutCategoryInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  likes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type AdvertisementCountOutputType
- */
-
-export type AdvertisementCountOutputType = {
-  favorites: number
-}
-
-export type AdvertisementCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  favorites?: boolean | AdvertisementCountOutputTypeCountFavoritesArgs
-}
-
-/**
- * AdvertisementCountOutputType without action
- */
-export type AdvertisementCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AdvertisementCountOutputType
-   */
-  select?: Prisma.AdvertisementCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * AdvertisementCountOutputType without action
- */
-export type AdvertisementCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FavoriteWhereInput
-}
 
 
 export type AdvertisementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -926,16 +838,15 @@ export type AdvertisementSelect<ExtArgs extends runtime.Types.Extensions.Interna
   title?: boolean
   description?: boolean
   price?: boolean
-  location?: boolean
   imageUrl?: boolean
   userId?: boolean
   categoryId?: boolean
+  location?: boolean
+  likes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  favorites?: boolean | Prisma.Advertisement$favoritesArgs<ExtArgs>
-  _count?: boolean | Prisma.AdvertisementCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["advertisement"]>
 
 export type AdvertisementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -943,10 +854,11 @@ export type AdvertisementSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   title?: boolean
   description?: boolean
   price?: boolean
-  location?: boolean
   imageUrl?: boolean
   userId?: boolean
   categoryId?: boolean
+  location?: boolean
+  likes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -958,10 +870,11 @@ export type AdvertisementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   title?: boolean
   description?: boolean
   price?: boolean
-  location?: boolean
   imageUrl?: boolean
   userId?: boolean
   categoryId?: boolean
+  location?: boolean
+  likes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -973,20 +886,19 @@ export type AdvertisementSelectScalar = {
   title?: boolean
   description?: boolean
   price?: boolean
-  location?: boolean
   imageUrl?: boolean
   userId?: boolean
   categoryId?: boolean
+  location?: boolean
+  likes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type AdvertisementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "price" | "location" | "imageUrl" | "userId" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["advertisement"]>
+export type AdvertisementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "price" | "imageUrl" | "userId" | "categoryId" | "location" | "likes" | "createdAt" | "updatedAt", ExtArgs["result"]["advertisement"]>
 export type AdvertisementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  favorites?: boolean | Prisma.Advertisement$favoritesArgs<ExtArgs>
-  _count?: boolean | Prisma.AdvertisementCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AdvertisementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1002,17 +914,17 @@ export type $AdvertisementPayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     category: Prisma.$CategoryPayload<ExtArgs>
-    favorites: Prisma.$FavoritePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     title: string
     description: string
     price: number
-    location: string
     imageUrl: string
     userId: string
     categoryId: number
+    location: string
+    likes: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["advertisement"]>
@@ -1411,7 +1323,6 @@ export interface Prisma__AdvertisementClient<T, Null = never, ExtArgs extends ru
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  favorites<T extends Prisma.Advertisement$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Advertisement$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1445,10 +1356,11 @@ export interface AdvertisementFieldRefs {
   readonly title: Prisma.FieldRef<"Advertisement", 'String'>
   readonly description: Prisma.FieldRef<"Advertisement", 'String'>
   readonly price: Prisma.FieldRef<"Advertisement", 'Int'>
-  readonly location: Prisma.FieldRef<"Advertisement", 'String'>
   readonly imageUrl: Prisma.FieldRef<"Advertisement", 'String'>
   readonly userId: Prisma.FieldRef<"Advertisement", 'String'>
   readonly categoryId: Prisma.FieldRef<"Advertisement", 'Int'>
+  readonly location: Prisma.FieldRef<"Advertisement", 'String'>
+  readonly likes: Prisma.FieldRef<"Advertisement", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Advertisement", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Advertisement", 'DateTime'>
 }
@@ -1844,30 +1756,6 @@ export type AdvertisementDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Advertisements to delete.
    */
   limit?: number
-}
-
-/**
- * Advertisement.favorites
- */
-export type Advertisement$favoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Favorite
-   */
-  select?: Prisma.FavoriteSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Favorite
-   */
-  omit?: Prisma.FavoriteOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FavoriteInclude<ExtArgs> | null
-  where?: Prisma.FavoriteWhereInput
-  orderBy?: Prisma.FavoriteOrderByWithRelationInput | Prisma.FavoriteOrderByWithRelationInput[]
-  cursor?: Prisma.FavoriteWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FavoriteScalarFieldEnum | Prisma.FavoriteScalarFieldEnum[]
 }
 
 /**

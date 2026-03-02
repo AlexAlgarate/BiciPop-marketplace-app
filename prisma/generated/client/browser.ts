@@ -32,8 +32,3 @@ export type User = Prisma.UserModel
  * 
  */
 export type Category = Prisma.CategoryModel
-/**
- * Model Favorite
- * 
- */
-export type Favorite = Prisma.FavoriteModel

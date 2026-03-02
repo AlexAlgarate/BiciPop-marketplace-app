@@ -11,5 +11,4 @@
 export type * from './models/Advertisement'
 export type * from './models/User'
 export type * from './models/Category'
-export type * from './models/Favorite'
 export type * from './commonInputTypes'
