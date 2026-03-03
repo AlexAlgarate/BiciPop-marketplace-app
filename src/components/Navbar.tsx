@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { Search } from 'lucide-react';
+import { ThemeToggle } from './theme-toggle';
 
 export const Navbar = () => {
   return (
-    <nav className="border-b border-border py-4 sticky top-0 bg-background z-50">
+    <nav className="border-b border-border py-4 sticky top-0 bg-background backdrop-blur supports-backdrop-filter:bg-background/60 z-50">
       <div className="container mx-auto px-4 flex items-center justify-between gap-4">
         <LogoSection />
         <SearchBar />
@@ -42,13 +43,20 @@ const SearchBar = () => {
 
 const AuthSections = () => {
   return (
-    <div className="flex items-center gap-4">
-      <button className="hidden sm:block text-muted hover:text-foreground font-medium cursor-pointer">
+    <div className="flex items-center gap-3 md:gap-4">
+      <ThemeToggle />
+      <Link
+        href="/login"
+        className="hidden sm:block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+      >
         Login
-      </button>
-      <button className="bg-primary hover:bg-primary-hover text-primary-foreground px-5 py-2 rounded-full cursor-pointer font-medium transition-colors">
+      </Link>
+      <Link
+        href="/register"
+        className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-4 py-2 rounded-full cursor-pointer transition-colors shadow-sm"
+      >
         Register
-      </button>
+      </Link>
     </div>
   );
 };
