@@ -60,6 +60,48 @@ async function main() {
         avatar: 3,
         location: cities[2],
       },
+      {
+        username: 'user4',
+        email: 'example4@example.com',
+        avatar: 4,
+        location: cities[0],
+      },
+      {
+        username: 'user5',
+        email: 'example5@example.com',
+        avatar: 5,
+        location: cities[1],
+      },
+      {
+        username: 'user6',
+        email: 'example6@example.com',
+        avatar: 6,
+        location: cities[2],
+      },
+      {
+        username: 'user7',
+        email: 'example7@example.com',
+        avatar: 7,
+        location: cities[0],
+      },
+      {
+        username: 'user8',
+        email: 'example8@example.com',
+        avatar: 8,
+        location: cities[1],
+      },
+      {
+        username: 'user9',
+        email: 'example9@example.com',
+        avatar: 9,
+        location: cities[2],
+      },
+      {
+        username: 'user10',
+        email: 'example10@example.com',
+        avatar: 10,
+        location: cities[0],
+      },
     ].map((u) =>
       prisma.user.create({
         data: {
@@ -79,6 +121,12 @@ async function main() {
       title: 'MacBook Air M3',
       description: 'Portátil Apple con chip M3, 8GB RAM, 256GB SSD',
       price: 1299,
+      category: 'Tecnología',
+    },
+    {
+      title: 'Garmin Forerunner 255',
+      description: 'Reloj deportivo para correr y hacer el pino',
+      price: 250,
       category: 'Tecnología',
     },
     {

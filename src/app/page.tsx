@@ -1,5 +1,7 @@
 import { Navbar } from '@/components/Navbar';
+import { Pagination } from '@/components/pagination';
 import { ProductCard } from '@/components/ProductCard';
+import { getAdvertisements } from '@/lib/advertisements';
 import {
   Book,
   Smartphone,
@@ -11,146 +13,23 @@ import {
   Car,
 } from 'lucide-react';
 
-const MOCK_PRODUCTS = [
-  {
-    id: 1,
-    title: 'Vespa Primavera 125cc new',
-    price: 3200,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Vehicles',
-    location: 'Rome',
-    createdAt: '2026-01-01 09:47:33.444',
-    description:
-      'Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description ',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 2,
-    title: 'MacBook Pro 14" M3 Pro',
-    price: 1800,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Electronics',
-    location: 'Barcelona',
-    createdAt: '2025-12-01 09:47:33.444',
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 3,
-    title: 'Professional Photography Services',
-    price: 100,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Services',
-    location: 'Madrid',
-    createdAt: '2026-02-01 09:47:33.444',
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 4,
-    title: 'Baby Stroller - Bugaboo Fox',
-    price: 400,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Kids & Baby',
-    location: 'Malaga',
-    createdAt: new Date(),
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 5,
-    title: 'Baby Stroller - Bugaboo Fox',
-    price: 400,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Kids & Baby',
-    location: 'Malaga',
-    createdAt: new Date(),
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 6,
-    title: 'Baby Stroller - Bugaboo Fox',
-    price: 400,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Kids & Baby',
-    location: 'Malaga',
-    createdAt: new Date(),
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 7,
-    title: 'Baby Stroller - Bugaboo Fox',
-    price: 400,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Kids & Baby',
-    location: 'Malaga',
-    createdAt: new Date(),
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 8,
-    title: 'Baby Stroller - Bugaboo Fox',
-    price: 400,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Kids & Baby',
-    location: 'Malaga',
-    createdAt: new Date(),
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-  {
-    id: 9,
-    title: 'Baby Stroller - Bugaboo Fox',
-    price: 400,
-    imageUrl: 'https://picsum.photos/seed/photo-1/400/300',
-    category: 'Kids & Baby',
-    location: 'Malaga',
-    createdAt: new Date(),
-    description: 'eoquweoqiuweoqiuewoqiwue',
-    likes: 8,
-    userName: 'pepito',
-    updatedAt: new Date(),
-  },
-];
+const PAGE_SIZE = 12;
 
-const CATEGORIES = [
-  { name: 'Books & Music', icon: Book },
-  { name: 'Electronics', icon: Smartphone },
-  { name: 'Fashion', icon: Shirt },
-  { name: 'Home & Garden', icon: House },
-  { name: 'Kids & Baby', icon: Baby },
-  { name: 'Services', icon: Wrench },
-  { name: 'Sports', icon: Dumbbell },
-  { name: 'Vehicles', icon: Car },
-];
+type SearchParamValue = string | string[] | undefined;
 
-export const Home = () => {
+type AdsPageSearchParams = Promise<Record<string, SearchParamValue>>;
+
+export const Home = async (props: { searchParams: AdsPageSearchParams }) => {
+  const searchParams = await props.searchParams;
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pb-20">
         <HeroSection />
         <CategoriesSection />
-        <LatestProducts />
+
+        <LatestProducts searchParams={searchParams} />
       </main>
     </div>
   );
@@ -184,6 +63,17 @@ const HeroSection = () => {
 };
 
 const CategoriesSection = () => {
+  const CATEGORIES = [
+    { name: 'Books & Music', icon: Book },
+    { name: 'Electronics', icon: Smartphone },
+    { name: 'Fashion', icon: Shirt },
+    { name: 'Home & Garden', icon: House },
+    { name: 'Kids & Baby', icon: Baby },
+    { name: 'Services', icon: Wrench },
+    { name: 'Sports', icon: Dumbbell },
+    { name: 'Vehicles', icon: Car },
+  ];
+
   return (
     <section className="container mx-auto px-4 mt-12">
       <h2 className="text-xl font-bold text-foreground mb-6">Browse by Category</h2>
@@ -206,9 +96,33 @@ const CategoriesSection = () => {
   );
 };
 
-const LatestProducts = () => {
-  // TODO await getProducts()
-  const products = MOCK_PRODUCTS;
+type LatestProductsProps = {
+  searchParams: Record<string, SearchParamValue>;
+};
+
+const getSingleSearchParam = (value: SearchParamValue) => {
+  if (Array.isArray(value)) {
+    return value[0];
+  }
+  return value;
+};
+
+const parseAdsSearchParams = (searchParams: Record<string, SearchParamValue>) => {
+  return {
+    query: getSingleSearchParam(searchParams.query) as string,
+    order: getSingleSearchParam(searchParams.order) as 'asc' | 'desc',
+    page: Number(getSingleSearchParam(searchParams.page)) || 1,
+  };
+};
+
+const LatestProducts = async ({ searchParams }: LatestProductsProps) => {
+  const { query, order, page } = parseAdsSearchParams(searchParams);
+
+  const {
+    items: products,
+    currentPage,
+    totalPages,
+  } = await getAdvertisements({ query, order, page, pageSize: PAGE_SIZE });
 
   return (
     <section className="container mx-auto px-4 mt-12">
@@ -222,12 +136,18 @@ const LatestProducts = () => {
         </a>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {products.length === 0 ? (
+        <p className="text-muted">No products found</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
     </section>
   );
 };
+
 export default Home;
