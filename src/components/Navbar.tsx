@@ -1,14 +1,18 @@
 import Link from 'next/link';
 import { Search } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
+import { logout } from '@/app/auth/logout/route';
 
-export const Navbar = () => {
+interface NavbarProps {
+  isAuthenticated: boolean;
+}
+export const Navbar = ({ isAuthenticated }: NavbarProps) => {
   return (
     <nav className="border-b border-border py-4 sticky top-0 bg-background backdrop-blur supports-backdrop-filter:bg-background/60 z-50">
       <div className="container mx-auto px-4 flex items-center justify-between gap-4">
         <LogoSection />
         <SearchBar />
-        <AuthSections />
+        <AuthSections isAuthenticated={isAuthenticated} />
       </div>
     </nav>
   );
@@ -41,22 +45,33 @@ const SearchBar = () => {
   );
 };
 
-const AuthSections = () => {
+interface AuthSectionsProps {
+  isAuthenticated: boolean;
+}
+const AuthSections = ({ isAuthenticated }: AuthSectionsProps) => {
   return (
     <div className="flex items-center gap-3 md:gap-4">
       <ThemeToggle />
-      <Link
-        href="/auth/login"
-        className="hidden sm:block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-      >
-        Login
-      </Link>
-      <Link
-        href="/auth/register"
-        className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-4 py-2 rounded-full cursor-pointer transition-colors shadow-sm"
-      >
-        Register
-      </Link>
+      {!isAuthenticated ? (
+        <>
+          <Link
+            href="/auth/login"
+            className="hidden sm:block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          >
+            Login
+          </Link>
+          <Link
+            href="/auth/register"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-4 py-2 rounded-full cursor-pointer transition-colors shadow-sm"
+          >
+            Register
+          </Link>
+        </>
+      ) : (
+        <form action={logout}>
+          <button type="submit">Cerrar sesión</button>
+        </form>
+      )}
     </div>
   );
 };

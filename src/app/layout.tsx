@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
+import { cookies } from 'next/headers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -18,16 +19,22 @@ export const metadata: Metadata = {
   description: 'Marketplace website for a Next project Web KeepCoding XIX Bootcamp',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get('session-token');
+  const isAuthenticated = !!sessionToken;
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar />
-        <main className="flex-1 p-4">{children}</main>
+        <Navbar isAuthenticated={isAuthenticated} />
+        <main className="flex items-center justify-center px-6 py-16">
+          <div className="w-full max-w-md">{children}</div>
+        </main>
       </body>
     </html>
   );
