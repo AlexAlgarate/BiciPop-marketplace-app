@@ -7,7 +7,7 @@ if (!process.env.JWT_SECRET) {
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
-const AUTH_COOKIE_NAME = 'session-token';
+const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME ?? 'session-token';
 const COOKIE_EXPIRE_SECONDS = 60 * 60 * 24;
 
 export async function createSession(userId: string) {

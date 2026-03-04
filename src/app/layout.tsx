@@ -25,7 +25,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const sessionToken = cookieStore.get('session-token');
+  const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME ?? 'session-token';
+  const sessionToken = cookieStore.get(AUTH_COOKIE_NAME);
   const isAuthenticated = !!sessionToken;
 
   return (
@@ -33,7 +34,7 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Navbar isAuthenticated={isAuthenticated} />
         <main className="flex items-center justify-center px-6 py-16">
-          <div className="w-full max-w-md">{children}</div>
+          <div>{children}</div>
         </main>
       </body>
     </html>
