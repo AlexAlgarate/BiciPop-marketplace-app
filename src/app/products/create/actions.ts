@@ -94,7 +94,7 @@ export const createAdAction = async (
       imageUrl,
       userId: session.userId,
     });
-    revalidatePath(`/products`);
+    revalidatePath(`/`);
 
     return {
       success: true,

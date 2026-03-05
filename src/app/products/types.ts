@@ -4,3 +4,5 @@ export type ProductFormState = {
   errors?: Record<string, string[]>;
   requestId: number;
 };
+
+export type Category = { id: number; name: string };
