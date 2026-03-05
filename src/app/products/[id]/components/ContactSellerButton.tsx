@@ -11,7 +11,7 @@ export const ContactSellerButton = () => {
     <div className="flex flex-col gap-3">
       <Button
         onClick={handleClick}
-        className="w-full bg-primary hover:bg-primary/90 text-white font-bold text-lg py-3.5 rounded-lg shadow-md transition-all active:scale-[0.98]"
+        className="w-full bg-primary hover:bg-primary/90 text-white font-bold text-lg py-3.5 rounded-lg shadow-md transition-all"
       >
         Contactar al vendedor *
       </Button>
