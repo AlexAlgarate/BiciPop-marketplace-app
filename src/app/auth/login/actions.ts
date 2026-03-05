@@ -69,5 +69,5 @@ export async function loginAction(
   }
 
   await createSession(user.id);
-  redirect('/products');
+  redirect('/');
 }

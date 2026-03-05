@@ -7,7 +7,7 @@ export default function ProjectDetailNotFound() {
       <p className="text-lg text-muted-foreground mb-4">
         El producto con el ID proporcionado no existe.
       </p>
-      <Link href="/products" className="text-lg text-primary text- hover:underline">
+      <Link href="/" className="text-lg text-primary text- hover:underline">
         Volver al listado de productos
       </Link>
     </div>

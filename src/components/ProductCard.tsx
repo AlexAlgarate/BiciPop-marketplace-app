@@ -36,7 +36,7 @@ const formatLikes = (likes: number) => {
 export const ProductCard = ({ product }: { product: ProductCardProps }) => {
   return (
     <Link
-      href={`/products/product/${product.id}`}
+      href={`/products/${product.id}`}
       className="group flex flex-col h-full bg-white border border-border
       rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all
       duration-300 overflow-hidden"
