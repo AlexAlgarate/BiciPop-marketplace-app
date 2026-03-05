@@ -23,12 +23,10 @@ export const Home = async (props: { searchParams: AdsPageSearchParams }) => {
   const searchParams = await props.searchParams;
 
   return (
-    <div className="min-h-screen bg-background">
-      <main className="pb-20">
-        <HeroSection />
-        <CategoriesSection />
-        <LatestProducts searchParams={searchParams} />
-      </main>
+    <div className="pb-20 space-y-10 md:space-y-16">
+      <HeroSection />
+      <CategoriesSection />
+      <LatestProducts searchParams={searchParams} />
     </div>
   );
 };
@@ -73,18 +71,21 @@ const CategoriesSection = () => {
   ];
 
   return (
-    <section className="container mx-auto px-4 mt-12">
+    <section className="container mx-auto px-4 mt-8 md:mt-12">
       <h2 className="text-xl font-bold text-foreground mb-6">Browse by Category</h2>
-      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+      <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 md_mx-0 md:px-0 scrollbar-hide">
         {CATEGORIES.map((cat, i) => (
           <div
             key={i}
-            className="flex flex-col items-center min-w-25 cursor-pointer group"
+            className="flex flex-col items-center min-w-20 md:min-w-25 cursor-pointer group shrink-0"
           >
-            <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center text-accent mb-2 group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
-              <cat.icon className="w-7 h-7" />
+            <div
+              className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-secondary flex items-center justify-center
+            text-accent mb-2 group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300"
+            >
+              <cat.icon className="w-6 h-6 md:w-7 md:h-7" />
             </div>
-            <span className="text-xs font-medium text-muted text-center">
+            <span className="text-xs font-medium text-muted text-center whitespace-nowrap">
               {cat.name}
             </span>
           </div>

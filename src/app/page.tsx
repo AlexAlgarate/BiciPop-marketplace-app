@@ -3,7 +3,7 @@ import Link from 'next/link';
 export const Home = () => {
   return (
     <div className="min-h-screen bg-background">
-      <main className="pb-20">Página de compraventa de productos</main>
+      <h1 className="pb-20">Página de compraventa de productos</h1>
       <div>
         <h2>Si ya has iniciado sesión puedes ir a la página de productos</h2>
         <Link
