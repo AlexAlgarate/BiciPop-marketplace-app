@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { MapPin, Clock } from 'lucide-react';
 import { timeAgo } from '@/utils/date';
+import Link from 'next/link';
 
 interface ProductCardProps {
   id: number;
@@ -46,15 +47,26 @@ const ProductInfo = ({ product }: { product: ProductCardProps }) => {
   return (
     <div className="p-4 flex flex-col flex-1">
       <div className="mb-2">
-        <div className="flex justify-between items-start gap-2">
-          <h3
-            className="font-semibold text-gray-900 line-clamp-1 text-base"
-            title={product.title}
+        <div className="flex justify-between">
+          <div className="flex flex-col justify-between items-start gap-2">
+            <h3
+              className="font-semibold text-gray-900 line-clamp-1 text-base"
+              title={product.title}
+            >
+              {product.title}
+            </h3>
+            <p className="text-[#00C18A] font-bold text-xl">
+              {formatPrice(product.price)}
+            </p>
+          </div>
+          {/* TODO fix style */}
+          <Link
+            href={`/products/product/${product.id}`}
+            className="bg-primary hover:bg-primary/90 py-2 px-4 rounded-full text-md font-medium text-primary-foreground cursor-pointer transition-colors shadow-sm"
           >
-            {product.title}
-          </h3>
+            Ver detalles
+          </Link>
         </div>
-        <p className="text-[#00C18A] font-bold text-xl">{formatPrice(product.price)}</p>
       </div>
 
       <p className="text-sm text-gray-500 line-clamp-2 mb-4 leading-relaxed">
