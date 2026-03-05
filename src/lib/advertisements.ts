@@ -1,5 +1,5 @@
 import prisma from './prisma';
-import { AdsResultDto } from './ads.types';
+import { AdDTO, AdsResultDto, CreateAdDTO } from './ads.types';
 
 interface AdsFilter {
   query: string;
@@ -8,15 +8,39 @@ interface AdsFilter {
   pageSize: number;
 }
 
-// interface CreateAdInput {
-//   title: string;
-//   description: string;
-//   price:number;
-//   imageUrl: string;
-//   location:string;
-//   category:string;
-//   userId: string;
-// }
+type AdvertisementWithRelations = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  userId: string;
+  categoryId: number;
+  location: string;
+  likes: number;
+  createdAt: Date;
+  updatedAt: Date;
+  category: { name: string };
+  user: { username: string };
+};
+
+const mapToAdDTO = (ad: AdvertisementWithRelations): AdDTO => {
+  return {
+    id: ad.id,
+    title: ad.title,
+    description: ad.description,
+    price: ad.price,
+    imageUrl: ad.imageUrl,
+    userId: ad.userId,
+    categoryId: ad.categoryId,
+    location: ad.location,
+    likes: ad.likes,
+    createdAt: ad.createdAt,
+    updatedAt: ad.updatedAt,
+    category: ad.category.name,
+    userName: ad.user.username,
+  };
+};
 
 function getWhereClause(query: string) {
   if (!query) {
@@ -53,25 +77,49 @@ export async function getAdvertisements({
     orderBy: {
       createdAt: order,
     },
+    include: {
+      category: true,
+      user: true,
+    },
   });
 
   return {
-    items,
+    items: items.map(mapToAdDTO),
     totalCount: totalProjects,
     totalPages,
     currentPage,
   };
 }
 
-// export async function createProject(input: CreateAdInput): Promise<AdDTO> {
-//   return prisma.advertisement.create({
-//     data: {
-//       title: input.title,
-//       description: input.description || 'autogenerado',
-//       imageUrl: input.imageUrl,
-//       userId: input.userId,
-//       price: input.price,
-//       location: input.location,
-//       category: input.category
-//     },
-//   })}
+export const getProductById = async (id: number): Promise<AdDTO | null> => {
+  const ad = await prisma.advertisement.findUnique({
+    where: { id },
+    include: {
+      category: true,
+      user: true,
+    },
+  });
+
+  if (!ad) return null;
+
+  return mapToAdDTO(ad);
+};
+
+export async function createAdvertisement(data: CreateAdDTO): Promise<AdDTO> {
+  const ad = await prisma.advertisement.create({
+    data: {
+      title: data.title,
+      description: data.description,
+      price: data.price,
+      imageUrl: data.imageUrl,
+      location: data.location,
+      userId: data.userId,
+      categoryId: data.categoryId,
+    },
+    include: {
+      category: true,
+      user: true,
+    },
+  });
+  return mapToAdDTO(ad);
+}

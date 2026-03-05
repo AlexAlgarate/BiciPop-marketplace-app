@@ -4,7 +4,7 @@ export interface AdDTO {
   description: string;
   price: number;
   imageUrl: string;
-  userId: string | null;
+  userId: string;
   categoryId: number;
   location: string;
   likes: number;
@@ -19,4 +19,14 @@ export interface AdsResultDto {
   totalCount: number;
   totalPages: number;
   currentPage: number;
+}
+
+export interface CreateAdDTO {
+  title: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  categoryId: number;
+  location: string;
+  userId: string;
 }
