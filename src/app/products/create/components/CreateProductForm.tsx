@@ -36,7 +36,6 @@ export const CreateAdForm = ({ categories }: CreateAdFormProps) => {
           name="title"
           type="text"
           placeholder="Ej: Bicicleta de montaña"
-          className="border border-border rounded-lg px-3 py-2 text-sm"
         />
       </FormField>
 
@@ -50,31 +49,18 @@ export const CreateAdForm = ({ categories }: CreateAdFormProps) => {
           name="description"
           rows={4}
           placeholder="Describe tu anuncio..."
-          className="border border-border rounded-lg px-3 py-2 text-sm resize-none"
+          className="resize-none"
         />
       </FormField>
 
       <FormField label="Precio" htmlFor="price" error={state.errors?.price}>
-        <input
-          id="price"
-          name="price"
-          type="number"
-          min={0}
-          placeholder="0"
-          className="border border-border rounded-lg px-3 py-2 text-sm"
-        />
+        <input id="price" name="price" type="number" placeholder="0" />
       </FormField>
 
       <CategorySelectField categories={categories} error={state.errors?.categories} />
 
       <FormField label="Localización" htmlFor="location" error={state.errors?.location}>
-        <input
-          id="location"
-          name="location"
-          type="text"
-          placeholder="Ej: Madrid"
-          className="border border-border rounded-lg px-3 py-2 text-sm"
-        />
+        <input id="location" name="location" type="text" placeholder="Ej: Madrid" />
       </FormField>
 
       <ImageUploadField error={state.errors?.imageUrl} />

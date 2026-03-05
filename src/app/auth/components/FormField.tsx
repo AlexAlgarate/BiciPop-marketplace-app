@@ -1,9 +1,11 @@
+import { FieldError } from '@/components/FieldError';
+
 type Props = {
   label: string;
   name: string;
   type?: string;
   defaultValue?: string;
-  error?: string;
+  error?: string | string[];
   placeholder: string;
 };
 
@@ -17,7 +19,7 @@ export function FormField({
 }: Props) {
   return (
     <div className="space-y-1">
-      <label htmlFor={name} className="block text-sm font-semibold">
+      <label htmlFor={name} className="block text-sm font-medium">
         {label}
       </label>
 
@@ -27,16 +29,15 @@ export function FormField({
         type={type}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        // required
         className={[
-          'w-full rounded border bg-background px-3 py-2 text-sm',
+          'w-full rounded-lg border bg-background px-3 py-2 text-sm',
           error
             ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500'
-            : 'border-border',
+            : 'border-border focus:outline-none focus:ring-2 focus:ring-primary/20',
         ].join(' ')}
       />
 
-      {error && <p className="text-xs text-red-600 dark:text-red-400">{error}</p>}
+      <FieldError error={error} />
     </div>
   );
 }

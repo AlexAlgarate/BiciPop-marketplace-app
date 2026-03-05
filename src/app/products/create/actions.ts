@@ -17,10 +17,7 @@ const createAdSchema = z.object({
     .string()
     .min(1, 'La descripción es obligatoria')
     .max(200, 'La descripción no puede tener más de 200 caracteres'),
-  price: z
-    .number()
-    .positive('El precio tiene que ser positivo')
-    .min(0.01, 'El precio tiene que ser al menos 0.01'),
+  price: z.number().positive('El precio tiene que ser positivo').min(1),
   categoryId: z.number().positive(),
   location: z
     .string()

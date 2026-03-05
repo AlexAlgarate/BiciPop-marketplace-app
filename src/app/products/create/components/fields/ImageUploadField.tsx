@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { FieldError } from '@/components/FieldError';
 
 interface ImageProps {
   error?: string[];
@@ -28,9 +29,9 @@ export const ImageUploadField = ({ error }: ImageProps) => {
   }, [preview]);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="space-y-1">
       <label htmlFor="imageUrl" className="text-sm font-medium">
-        URL de imagen
+        Sube la imagen de tu bici
       </label>
 
       <input
@@ -40,16 +41,24 @@ export const ImageUploadField = ({ error }: ImageProps) => {
         placeholder="Sube una fotografía de tu bici.."
         accept="image/*"
         onChange={handleFileChange}
-        className="w-full rounded border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
+        className={[
+          'w-full bg-background rounded-lg border px-3 py-2 text-sm',
+          'focus:outline-none focus:ring-2',
+          error
+            ? 'border-red-500 focus:ring-red-500'
+            : 'border-border focus:ring-primary/20',
+        ].join(' ')}
       />
-      {error && <p className="text-red-500 text-xs">{error}</p>}
+
+      <FieldError error={error} />
+
       {preview && (
         <Image
           src={preview}
           alt="Preview"
           width={50}
           height={50}
-          className="w-full h-full rounded border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
+          className="w-full h-auto rounded-lg border border-border mt-2 object-cover"
         />
       )}
     </div>

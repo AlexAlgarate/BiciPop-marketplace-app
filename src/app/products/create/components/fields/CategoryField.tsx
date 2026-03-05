@@ -1,4 +1,5 @@
 import { Category } from '@/app/products/types';
+import { FieldError } from '@/components/FieldError';
 
 interface CategorySelectFieldProps {
   categories: Category[];
@@ -10,8 +11,8 @@ export const CategorySelectField = ({
   error,
 }: CategorySelectFieldProps) => {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor="categoryId" className="text-sm font-medium text-foreground">
+    <div className="space-y-1">
+      <label htmlFor="categoryId" className="text-sm font-medium">
         ¿Qué tipo de bici es?
       </label>
 
@@ -19,10 +20,14 @@ export const CategorySelectField = ({
         <select
           id="categoryId"
           name="categoryId"
-          className="w-full appearance-none border border-border rounded-lg px-4
-            py-2.5 text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/20
-            focus:border-primary transition-all cursor-pointer"
           defaultValue=""
+          className={[
+            'w-full appearance-none bg-background rounded-lg border px-3 py-2 text-sm',
+            'focus:ring-2 focus:outline-none cursor-pointer',
+            error
+              ? 'border-red-500 focus:ring-red-500'
+              : 'border-border focus:ring-primary/20',
+          ].join(' ')}
         >
           <option value="" disabled hidden>
             Selecciona el estilo (ej: Carretera, MTB...)
@@ -45,7 +50,7 @@ export const CategorySelectField = ({
         </div>
       </div>
 
-      {error && <p className="text-red-500 text-xs font-medium mt-1">{error}</p>}
+      <FieldError error={error} />
 
       <p className="text-xs text-muted-foreground">
         {'* Si es una E-bike de montaña, te sugerimos la categoría "Montaña"'}
