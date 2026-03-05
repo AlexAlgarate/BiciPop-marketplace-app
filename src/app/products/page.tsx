@@ -11,6 +11,7 @@ import {
   Dumbbell,
   Car,
 } from 'lucide-react';
+import Link from 'next/link';
 
 const PAGE_SIZE = 12;
 
@@ -134,7 +135,17 @@ const LatestProducts = async ({ searchParams }: LatestProductsProps) => {
       </div>
 
       {products.length === 0 ? (
-        <p className="text-muted">No products found</p>
+        <div className="flex flex-col gap-2 items-center border border-border p-4">
+          <p className="text-muted text-lg mb-3">
+            No hay ningún producto. Si quieres, ¡puedes comenzar tú!
+          </p>
+          <Link
+            href={'/products/create'}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-lg rounded-full py-2 px-4 cursor-pointer transition-transform duration-300 shadow-lg hover:scale-105"
+          >
+            Crear producto
+          </Link>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
           {products.map((product) => (
