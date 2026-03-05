@@ -6,10 +6,14 @@ export const LogoSection = () => {
       href="/"
       className="text-2xl font-bold text-foreground flex items-center gap-2"
     >
-      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold">
+      <span
+        className="w-12 h-12 bg-primary rounded-full flex items-center
+        justify-center text-primary-foreground font-bold hover:scale-105
+        transition-transform duration-200"
+      >
         B
-      </div>
-      BiciPop
+      </span>
+      <span>BiciPop</span>
     </Link>
   );
 };

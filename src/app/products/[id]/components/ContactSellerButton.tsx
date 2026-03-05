@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/Button';
+
 export const ContactSellerButton = () => {
   const handleClick = () => {
     console.log('Feature not implemented yet.');
@@ -7,14 +9,14 @@ export const ContactSellerButton = () => {
 
   return (
     <div className="flex flex-col gap-3">
-      <button
+      <Button
         onClick={handleClick}
-        className="w-full bg-primary hover:bg-primary/90 text-white font-bold text-lg py-3.5 rounded-xl shadow-md transition-all active:scale-[0.98]"
+        className="w-full bg-primary hover:bg-primary/90 text-white font-bold text-lg py-3.5 rounded-lg shadow-md transition-all active:scale-[0.98]"
       >
-        Contactar al vendedor
-      </button>
+        Contactar al vendedor *
+      </Button>
       <p className="text-xs text-center text-muted-foreground">
-        Al contactar aceptas nuestras condiciones de uso y privacidad.
+        * Al contactar aceptas nuestras condiciones de uso y privacidad.
       </p>
     </div>
   );

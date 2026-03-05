@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/Button';
 import { Heart } from 'lucide-react';
 
 export const FavoriteButton = () => {
@@ -7,11 +8,11 @@ export const FavoriteButton = () => {
     console.log('Favorite button feature not implemented yet');
   };
   return (
-    <button
+    <Button
       onClick={handleClick}
-      className="p-2 rounded-full hover:bg-secondary text-muted-foreground hover:text-red-500 transition-colors cursor-pointer"
+      className="p-2 hover:bg-secondary text-muted-foreground hover:text-red-500"
     >
       <Heart className="w-5 h-5" />
-    </button>
+    </Button>
   );
 };

@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
+import { Button } from './ui/Button';
 
 interface PaginationProps {
   currentPage: number;
@@ -71,11 +72,11 @@ const PaginationNumber = ({
   isActive: boolean;
   onClick: () => void;
 }) => (
-  <button
+  <Button
     onClick={onClick}
     aria-current={isActive ? 'page' : undefined}
     className={`
-      h-9 w-9 flex items-center justify-center rounded-full text-sm font-medium transition-all duration-200 cursor-pointer
+      h-9 w-9 flex items-center justify-center text-sm font-medium transition-all duration-200
       ${
         isActive
           ? 'bg-primary text-white shadow-md scale-105 '
@@ -84,7 +85,7 @@ const PaginationNumber = ({
     `}
   >
     {page}
-  </button>
+  </Button>
 );
 
 const PaginationArrow = ({
@@ -99,21 +100,21 @@ const PaginationArrow = ({
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
 
   return (
-    <button
+    <Button
       onClick={onClick}
       disabled={isDisabled}
       className={`
-        h-9 w-9 flex items-center justify-center rounded-full transition-colors
+        h-9 w-9 flex items-center justify-center rounded-full
         ${
           isDisabled
             ? 'text-gray-300 cursor-not-allowed'
-            : 'text-gray-600 cursor-pointer hover:bg-gray-100 hover:text-primary active:bg-gray-200'
+            : 'text-gray-600 hover:bg-gray-100 hover:text-primary active:bg-gray-200'
         }
       `}
       aria-label={direction === 'left' ? 'Página anterior' : 'Página siguiente'}
     >
       <Icon className="w-5 h-5" />
-    </button>
+    </Button>
   );
 };
 

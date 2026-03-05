@@ -83,16 +83,16 @@ const HeroSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="#products" // Un anchor link o simplemente scroll visual
+              href="/products/create"
               className="bg-primary hover:bg-primary/90 text-white px-8 py-3.5 rounded-full font-bold transition-transform active:scale-95 text-center"
             >
-              Ver bicicletas
+              Vender mi bici
             </Link>
             <Link
-              href="/products/create"
+              href="/"
               className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 rounded-full font-bold transition-all text-center"
             >
-              Vender mi bici
+              Ver bicicletas
             </Link>
           </div>
         </div>

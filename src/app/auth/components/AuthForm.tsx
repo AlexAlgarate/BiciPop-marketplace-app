@@ -3,6 +3,7 @@
 import { useActionState } from 'react';
 import { AuthFormState, initialRegisterState } from '../types';
 import { FormField } from './FormField';
+import { Button } from '@/components/ui/Button';
 
 type FieldConfig = {
   name: string;
@@ -37,12 +38,12 @@ export const AuthForm = ({ action, fields, submitText }: Props) => {
         />
       ))}
 
-      <button
+      <Button
         type="submit"
-        className="rounded bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+        className="rounded-lg bg-primary text-sm font-semibold text-primary-foreground"
       >
         {submitText}
-      </button>
+      </Button>
 
       {state.message && (
         <p

@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/Button';
 import { Edit2, Trash2 } from 'lucide-react';
 
 export const AdManagementPanel = () => {
@@ -7,14 +8,14 @@ export const AdManagementPanel = () => {
         Administrar Anuncio
       </h4>
       <div className="flex gap-3">
-        <button className="flex-1 flex items-center justify-center gap-2 border border-border hover:bg-secondary hover:border-gray-400 text-foreground font-medium py-2.5 rounded-lg transition-colors">
+        <Button className="flex-1 flex items-center justify-center gap-2 border border-border hover:bg-secondary hover:border-gray-400 text-foreground font-medium py-2.5 rounded-lg">
           <Edit2 className="w-4 h-4" />
           Editar
-        </button>
-        <button className="flex-1 flex items-center justify-center gap-2 border border-red-200 text-red-600 hover:bg-red-50 font-medium py-2.5 rounded-lg transition-colors">
+        </Button>
+        <Button className="flex-1 flex items-center justify-center gap-2 border border-red-200/40 text-red-600 hover:bg-red-50 font-medium py-2.5 rounded-lg">
           <Trash2 className="w-4 h-4" />
           Eliminar
-        </button>
+        </Button>
       </div>
     </div>
   );

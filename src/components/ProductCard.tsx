@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { MapPin, Clock, Heart, User } from 'lucide-react';
 import { timeAgo } from '@/utils/date';
 import Link from 'next/link';
+import { Button } from './ui/Button';
 
 interface ProductCardProps {
   id: number;
@@ -109,15 +110,15 @@ const ProductImage = ({ product }: { product: ProductCardProps }) => {
         {product.category}
       </span>
 
-      <button
+      <Button
         onClick={handleClick}
         aria-label="Like product"
         className="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-quite/90 backdrop-blur-md
-        px-2.5 py-1.5 rounded-full text-gray-700 shadow-sm hover:text-red-500 hover:bg-white transition-colors"
+        px-2.5 py-1.5 text-gray-700 shadow-sm hover:text-red-500 hover:bg-white "
       >
         <Heart className="w-3.5 h-3.5 transition-colors" />
         <p className="text-xs font-semibold">{formatLikes(product.likes)}</p>
-      </button>
+      </Button>
 
       <Image
         src={product.imageUrl}

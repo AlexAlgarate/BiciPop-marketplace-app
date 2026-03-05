@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/Button';
 import { Share2 } from 'lucide-react';
 
 export const ShareButton = () => {
@@ -12,11 +13,11 @@ export const ShareButton = () => {
   };
 
   return (
-    <button
+    <Button
       onClick={handleClick}
-      className="p-2 rounded-full hover:bg-secondary text-muted-foreground transition-colors cursor-pointer"
+      className="p-2 hover:bg-secondary text-muted-foreground"
     >
       <Share2 className="w-5 h-5" />
-    </button>
+    </Button>
   );
 };

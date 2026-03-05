@@ -2,6 +2,7 @@
 
 import { useTheme } from '@/hooks/use-theme';
 import { Sun, Moon } from 'lucide-react';
+import { Button } from './ui/Button';
 
 export const ThemeToggle = () => {
   const { theme, toggleTheme, mounted } = useTheme();
@@ -11,10 +12,10 @@ export const ThemeToggle = () => {
   }
 
   return (
-    <button
+    <Button
       onClick={toggleTheme}
-      className="p-2 rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-800 transition-colors
-    duration-200 focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+      className="p-2 hover:bg-gray-200/50 dark:hover:bg-gray-800
+    duration-200 focus:outline-none focus:ring-1 focus:ring-primary"
       aria-label="Cambiar tema"
     >
       {theme === 'light' ? (
@@ -22,6 +23,6 @@ export const ThemeToggle = () => {
       ) : (
         <Moon className="w-5 h-5 text-blue-500" />
       )}
-    </button>
+    </Button>
   );
 };
