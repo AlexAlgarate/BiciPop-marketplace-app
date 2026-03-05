@@ -7,10 +7,10 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      //! Temporary
+      //! For seed photos
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
+        hostname: 'images.unsplash.com',
       },
     ],
   },
