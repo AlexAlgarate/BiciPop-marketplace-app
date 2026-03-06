@@ -30,10 +30,12 @@ export function FormField({
         defaultValue={defaultValue}
         placeholder={placeholder}
         className={[
-          'w-full rounded-lg border bg-background px-3 py-2 text-sm',
+          'w-full rounded-lg border px-3 py-2 text-sm',
+          'bg-white dark:bg-background',
+          'text-foreground placeholder:text-muted-foreground',
           error
             ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500'
-            : 'border-border focus:outline-none focus:ring-2 focus:ring-primary/20',
+            : 'border-gray-300 dark:border-border focus:outline-none focus:ring-2 focus:ring-primary/20',
         ].join(' ')}
       />
 

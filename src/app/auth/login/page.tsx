@@ -3,24 +3,33 @@ import { loginAction } from './actions';
 
 const LoginPage = () => {
   return (
-    <AuthForm
-      action={loginAction}
-      submitText="Iniciar sesión"
-      fields={[
-        {
-          name: 'email',
-          label: 'Email',
-          type: 'email',
-          placeholder: 'Ej: juanperez@email.com',
-        },
-        {
-          name: 'password',
-          label: 'Password',
-          type: 'password',
-          placeholder: 'Mín 8 caracteres',
-        },
-      ]}
-    />
+    <div className="min-h-[calc(75vh-64px)] px-4 py-12">
+      <div className="mx-auto max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-foreground">
+            Inicia sesión en BiciPop
+          </h1>
+        </div>
+        <AuthForm
+          action={loginAction}
+          submitText="Iniciar sesión"
+          fields={[
+            {
+              name: 'email',
+              label: 'Email',
+              type: 'email',
+              placeholder: 'Ej: juanperez@email.com',
+            },
+            {
+              name: 'password',
+              label: 'Password',
+              type: 'password',
+              placeholder: 'Mín 8 caracteres',
+            },
+          ]}
+        />
+      </div>
+    </div>
   );
 };
 

@@ -35,7 +35,7 @@ export const AuthForm = ({ action, fields, submitText }: Props) => {
   return (
     <form
       action={formAction}
-      className="rounded-lg border border-border bg-card p-6 space-y-4"
+      className="rounded-lg border border-gray-200 dark:border-border bg-white dark:bg-card shadow-sm p-8 space-y-5"
     >
       {fields.map((field) => (
         <FormField
@@ -51,14 +51,14 @@ export const AuthForm = ({ action, fields, submitText }: Props) => {
 
       <Button
         type="submit"
-        className="rounded-lg bg-primary text-sm font-semibold text-primary-foreground"
+        className="w-full rounded-lg bg-primary text-sm font-semibold text-primary-foreground py-2.5 mt-2"
       >
         {submitText}
       </Button>
 
       {state.message && (
         <p
-          className={`text-sm ${
+          className={`text-sm text-center ${
             state.success
               ? 'text-green-600 dark:text-green-400'
               : 'text-red-600 dark:text-red-400'

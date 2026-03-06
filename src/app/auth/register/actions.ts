@@ -36,8 +36,7 @@ export async function registerAction(
     };
   }
 
-  const { email: rawEmail, password, username, location } = parsed.data;
-  const email = rawEmail.toLowerCase();
+  const { email, password, username, location } = parsed.data;
 
   const existingUser = await getUserByEmail(email);
 
