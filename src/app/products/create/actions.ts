@@ -23,6 +23,7 @@ export const createAdAction = async (
   const locationInput = String(formData.get('location'));
   const priceInput = Number(formData.get('price'));
   const categoryIdInput = Number(formData.get('categoryId'));
+  const image = formData.get('imageUrl') as File;
 
   const parsed = createAdSchema.safeParse({
     title: titleInput,
@@ -36,47 +37,49 @@ export const createAdAction = async (
     return {
       success: false,
       message:
-        'Hay errores en el formulario. Por favor, corrígelos e intenta de nuevo.',
+        'Hay errores en el formulario. Por favor, corrígelos e inténtelo de nuevo.',
       errors: getFieldErrorsFromTree(parsed.error),
       requestId: Date.now(),
+      values: {
+        title: titleInput,
+        description: descriptionInput,
+        price: priceInput,
+        location: locationInput,
+        category: categoryIdInput,
+      },
     };
   }
 
-  const image = formData.get('imageUrl') as File;
   const validImage = isValidImage(image);
   if (!validImage) {
     return {
       success: false,
       message: 'El archivo debe ser una imagen',
       requestId: Date.now(),
+      values: {
+        title: titleInput,
+        description: descriptionInput,
+        price: priceInput,
+        location: locationInput,
+        category: categoryIdInput,
+      },
     };
   }
   const imageUrl = await saveImageInPublic(image);
 
-  try {
-    const data = parsed.data;
-    const { id } = await createAdvertisement({
-      ...data,
-      imageUrl,
-      userId: session.userId,
-    });
-    revalidatePath(`/`);
+  const { id } = await createAdvertisement({
+    ...parsed.data,
+    imageUrl,
+    userId: session.userId,
+  });
+  revalidatePath(`/`);
 
-    return {
-      success: true,
-      message: 'Anuncio creado exitosamente',
-      requestId: Date.now(),
-      createdId: id,
-    };
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : 'Error creando el anuncio.';
-    return {
-      success: false,
-      message: errorMessage,
-      requestId: Date.now(),
-    };
-  }
+  return {
+    success: true,
+    message: 'Anuncio creado exitosamente',
+    requestId: Date.now(),
+    createdId: id,
+  };
 };
 
 const VALID_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/jpg']);

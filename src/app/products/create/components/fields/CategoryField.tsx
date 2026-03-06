@@ -4,11 +4,13 @@ import { FieldError } from '@/components/FieldError';
 interface CategorySelectFieldProps {
   categories: Category[];
   error?: string[];
+  defaultValue?: string | number;
 }
 
 export const CategorySelectField = ({
   categories,
   error,
+  defaultValue,
 }: CategorySelectFieldProps) => {
   return (
     <div className="space-y-1">
@@ -20,7 +22,7 @@ export const CategorySelectField = ({
         <select
           id="categoryId"
           name="categoryId"
-          defaultValue=""
+          defaultValue={defaultValue}
           className={[
             'w-full appearance-none bg-background rounded-lg border px-3 py-2 text-sm',
             'focus:ring-2 focus:outline-none cursor-pointer',

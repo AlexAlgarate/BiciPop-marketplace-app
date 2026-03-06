@@ -1,32 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { FieldError } from '@/components/FieldError';
 
 interface ImageProps {
   error?: string[];
+  file: File | null;
+  onFileChange: (file: File | null) => void;
 }
 
-export const ImageUploadField = ({ error }: ImageProps) => {
-  const [preview, setPreview] = useState<string | null>(null);
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) {
-      setPreview(null);
-      return;
-    }
-
-    const NextUrl = URL.createObjectURL(file);
-    setPreview(NextUrl);
-  };
+export const ImageUploadField = ({ error, file, onFileChange }: ImageProps) => {
+  const preview = file ? URL.createObjectURL(file) : null;
 
   useEffect(() => {
     return () => {
-      if (preview) {
-        URL.revokeObjectURL(preview);
-      }
+      if (preview) URL.revokeObjectURL(preview);
     };
   }, [preview]);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onFileChange(event.target.files?.[0] ?? null);
+  };
 
   return (
     <div className="space-y-1">
