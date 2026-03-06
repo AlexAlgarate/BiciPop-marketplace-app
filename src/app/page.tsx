@@ -1,6 +1,7 @@
 import { Pagination } from '@/components/pagination';
 import { ProductCard } from '@/components/ProductCard';
 import { getAdvertisements } from '@/lib/advertisements';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 const PAGE_SIZE = 12;
@@ -19,6 +20,13 @@ const parseAdsSearchParams = (searchParams: Record<string, SearchParamValue>) =>
     order: getSingleSearchParam(searchParams.order) as 'asc' | 'desc',
     page: Number(getSingleSearchParam(searchParams.page)) || 1,
   };
+};
+
+export const metadata: Metadata = {
+  title: 'BiciPop',
+  description:
+    'Página de compraventa de bicicletas de segunda mano. Aprovecha las ofertas.',
+  creator: 'Alex Algarate',
 };
 
 export default async function Home(props: { searchParams: AdsPageSearchParams }) {
