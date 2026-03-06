@@ -2,43 +2,12 @@
 
 import { getSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
-import z from 'zod';
 import { ProductFormState } from '../types';
 import { createAdvertisement } from '@/lib/advertisements';
 import { saveImageInPublic } from '@/lib/uploads';
 import { revalidatePath } from 'next/cache';
-
-const createAdSchema = z.object({
-  title: z
-    .string()
-    .min(1, 'El título es obligatorio')
-    .max(30, 'El título es demasiado largo. Máx. 30 caracteres.'),
-  description: z
-    .string()
-    .min(1, 'La descripción es obligatoria')
-    .max(200, 'La descripción no puede tener más de 200 caracteres'),
-  price: z.number().positive('El precio tiene que ser positivo').min(1),
-  categoryId: z.number().positive(),
-  location: z
-    .string()
-    .min(1, 'La localidad es obligatoria')
-    .max(20, 'La localidad es demasiado largoa. Máx. 20 caracteres.'),
-});
-
-const getFieldErrorsFromTree = (
-  error: z.ZodError<z.infer<typeof createAdSchema>>,
-): Record<string, string[]> => {
-  const tree = z.treeifyError(error);
-  const fieldErrors: Record<string, string[]> = {};
-
-  for (const [fieldName, node] of Object.entries(tree.properties ?? {})) {
-    if (node?.errors.length) {
-      fieldErrors[fieldName] = node.errors;
-    }
-  }
-
-  return fieldErrors;
-};
+import { createAdSchema } from '@/lib/validation/productSchemas';
+import { getFieldErrorsFromTree } from '@/lib/validation';
 
 export const createAdAction = async (
   _previousState: ProductFormState,
@@ -86,7 +55,7 @@ export const createAdAction = async (
 
   try {
     const data = parsed.data;
-    await createAdvertisement({
+    const { id } = await createAdvertisement({
       ...data,
       imageUrl,
       userId: session.userId,
@@ -97,6 +66,7 @@ export const createAdAction = async (
       success: true,
       message: 'Anuncio creado exitosamente',
       requestId: Date.now(),
+      createdId: id,
     };
   } catch (error) {
     const errorMessage =

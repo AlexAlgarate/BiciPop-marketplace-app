@@ -1,32 +1,11 @@
 'use server';
 
-import z from 'zod';
 import { AuthFormState } from '../types';
 import prisma from '@/lib/prisma';
 import { hashPassword } from '../utils/securityService';
 import { getUserByEmail } from '@/lib/users';
-
-const registerSchema = z.object({
-  email: z.email('Email no es válido'),
-  password: z.string().min(4, 'La contraseña debe tener al menos 4 carácteres'),
-  location: z.string(),
-  username: z.string(),
-});
-
-const getFieldErrorsFromTree = (
-  error: z.ZodError<z.infer<typeof registerSchema>>,
-): Record<string, string[]> => {
-  const tree = z.treeifyError(error);
-  const fieldErrors: Record<string, string[]> = {};
-
-  for (const [fieldName, node] of Object.entries(tree.properties ?? {})) {
-    if (node?.errors.length) {
-      fieldErrors[fieldName] = node.errors;
-    }
-  }
-
-  return fieldErrors;
-};
+import { registerSchema } from '@/lib/validation/authSchemas';
+import { getFieldErrorsFromTree } from '@/lib/validation';
 
 export async function registerAction(
   _prevState: AuthFormState,
