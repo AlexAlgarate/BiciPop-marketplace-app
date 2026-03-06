@@ -1,9 +1,10 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { AuthFormState, initialRegisterState } from '../types';
 import { FormField } from './FormField';
 import { Button } from '@/components/ui/Button';
+import { useRouter } from 'next/navigation';
 
 type FieldConfig = {
   name: string;
@@ -12,14 +13,24 @@ type FieldConfig = {
   placeholder: string;
 };
 
-type Props = {
+interface Props {
   action: (_prevState: AuthFormState, formData: FormData) => Promise<AuthFormState>;
   fields: FieldConfig[];
   submitText: string;
-};
+}
 
 export const AuthForm = ({ action, fields, submitText }: Props) => {
+  const router = useRouter();
   const [state, formAction] = useActionState(action, initialRegisterState);
+
+  useEffect(() => {
+    if (state.success) {
+      const time = setTimeout(() => {
+        router.push('/');
+      }, 1500);
+      return () => clearTimeout(time);
+    }
+  }, [router, state.success]);
 
   return (
     <form

@@ -3,7 +3,6 @@
 import { AuthFormState } from '../types';
 import { comparePassword } from '../utils/securityService';
 import { getAuthUserByEmail } from '@/lib/users';
-import { redirect } from 'next/navigation';
 import { createSession } from '@/lib/auth';
 import { loginSchema } from '@/lib/validation/authSchemas';
 import { getFieldErrorsFromTree } from '@/lib/validation';
@@ -28,27 +27,28 @@ export async function loginAction(
       values: { email: emailInput },
     };
   }
-  const invalidCredentials = (email: string): AuthFormState => ({
-    success: false,
-    errors: {},
-    values: { email },
-    message: 'Credenciales inválidas',
-  });
-  const email = parsed.data.email.toLowerCase();
 
+  const email = parsed.data.email.toLowerCase();
   const user = await getAuthUserByEmail(email);
 
-  if (!user) {
-    return invalidCredentials(emailInput);
-  }
+  if (!user) return invalidCredentials(emailInput);
 
-  const password = parsed.data.password;
-  const validPassword = await comparePassword(password, user.passwordHash);
+  const validPassword = await comparePassword(parsed.data.password, user.passwordHash);
 
-  if (!validPassword) {
-    return invalidCredentials(emailInput);
-  }
+  if (!validPassword) return invalidCredentials(emailInput);
 
   await createSession(user.id);
-  redirect('/');
+  return {
+    success: true,
+    message: 'Sesión iniciada correctamente',
+    errors: {},
+    values: {},
+  };
 }
+
+const invalidCredentials = (email: string): AuthFormState => ({
+  success: false,
+  message: 'Credenciales inválidas',
+  errors: {},
+  values: { email },
+});

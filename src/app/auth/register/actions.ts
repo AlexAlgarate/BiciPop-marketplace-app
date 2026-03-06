@@ -35,10 +35,13 @@ export async function registerAction(
       },
     };
   }
-  const email = parsed.data.email.toLowerCase();
-  const user = await getUserByEmail(email);
 
-  if (user) {
+  const { email: rawEmail, password, username, location } = parsed.data;
+  const email = rawEmail.toLowerCase();
+
+  const existingUser = await getUserByEmail(email);
+
+  if (existingUser) {
     return {
       success: false,
       message: 'El usuario ya existe',
@@ -46,8 +49,6 @@ export async function registerAction(
       values: { username: usernameInput, location: locationInput },
     };
   }
-
-  const password = parsed.data.password;
 
   const passwordHash = await hashPassword(password);
 
@@ -63,8 +64,6 @@ export async function registerAction(
       },
     };
   }
-  const username = parsed.data.username;
-  const location = parsed.data.location;
 
   await prisma.user.create({
     data: {
@@ -77,8 +76,8 @@ export async function registerAction(
 
   return {
     success: true,
-    errors: {},
     message: 'Usuario creado correctamente',
-    values: { email: '', password: '' },
+    errors: {},
+    values: {},
   };
 }
