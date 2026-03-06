@@ -67,7 +67,7 @@ export const createAdAction = async (
   }
   const imageUrl = await saveImageInPublic(image);
 
-  const { id } = await createAdvertisement({
+  await createAdvertisement({
     ...parsed.data,
     imageUrl,
     userId: session.userId,
@@ -78,7 +78,6 @@ export const createAdAction = async (
     success: true,
     message: 'Anuncio creado exitosamente',
     requestId: Date.now(),
-    createdId: id,
   };
 };
 

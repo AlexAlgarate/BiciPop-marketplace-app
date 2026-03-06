@@ -32,11 +32,11 @@ export const CreateAdForm = ({ categories }: CreateAdFormProps) => {
   useEffect(() => {
     if (state.success) {
       const timer = setTimeout(() => {
-        router.push(`/products/${state.createdId}`);
+        router.push(`/`);
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [router, state.success, state.createdId]);
+  }, [router, state.success]);
 
   return (
     <form
