@@ -3,7 +3,7 @@
 import { AuthFormState } from '../types';
 import { comparePassword } from '../utils/securityService';
 import { getAuthUserByEmail } from '@/lib/users';
-import { createSession } from '@/lib/auth';
+import { createSession } from '@/lib/auth/auth';
 import { loginSchema } from '@/lib/validation/authSchemas';
 import { getFieldErrorsFromTree } from '@/lib/validation';
 

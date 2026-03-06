@@ -1,7 +1,7 @@
 'use server';
 
 import { deleteAd, getAdByOwner } from '@/lib/advertisements';
-import { getSession } from '@/lib/auth';
+import { getSession } from '@/lib/auth/auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 

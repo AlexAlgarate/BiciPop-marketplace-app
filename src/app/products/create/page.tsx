@@ -1,7 +1,7 @@
 import { getCategories } from '@/lib/categories';
 
 import { redirect } from 'next/navigation';
-import { getSession } from '@/lib/auth';
+import { getSession } from '@/lib/auth/auth';
 import { CreateAdForm } from './components/CreateProductForm';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';

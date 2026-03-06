@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/Button';
-import { getSession } from '@/lib/auth';
+import { getSession } from '@/lib/auth/auth';
 import { Edit2 } from 'lucide-react';
 import { DeleteAdButton } from './DeleteAdButton';
 
