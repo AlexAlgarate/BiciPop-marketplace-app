@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getProductById } from '@/lib/advertisements';
-import ProductDetailView from './ProductDetailView';
+import { ProductDetailView } from './ProductDetailView';
 
 type ProductDetailParams = Promise<{
   id: string;

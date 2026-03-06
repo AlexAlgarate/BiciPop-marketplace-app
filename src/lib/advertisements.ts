@@ -105,7 +105,7 @@ export const getProductById = async (id: number): Promise<AdDTO | null> => {
   return mapToAdDTO(ad);
 };
 
-export async function createAdvertisement(data: CreateAdDTO): Promise<AdDTO> {
+export const createAdvertisement = async (data: CreateAdDTO): Promise<AdDTO> => {
   const ad = await prisma.advertisement.create({
     data: {
       title: data.title,
@@ -122,4 +122,18 @@ export async function createAdvertisement(data: CreateAdDTO): Promise<AdDTO> {
     },
   });
   return mapToAdDTO(ad);
-}
+};
+
+export const getAdByOwner = async (
+  adId: number,
+  userId: string,
+): Promise<{ id: number } | null> => {
+  return prisma.advertisement.findUnique({
+    where: { id: adId, userId },
+    select: { id: true },
+  });
+};
+
+export const deleteAd = async (adId: number) => {
+  return prisma.advertisement.delete({ where: { id: adId } });
+};
