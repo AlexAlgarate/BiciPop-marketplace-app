@@ -3,7 +3,7 @@
 import { getSession } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
 import { ProductFormState } from '../types';
-import { createAdvertisement } from '@/lib/advertisements';
+import { createAd } from '@/lib/api/advertisements';
 import { saveImageInPublic } from '@/lib/uploads';
 import { revalidatePath } from 'next/cache';
 import { createAdSchema } from '@/lib/validation/productSchemas';
@@ -67,7 +67,7 @@ export const createAdAction = async (
   }
   const imageUrl = await saveImageInPublic(image);
 
-  await createAdvertisement({
+  await createAd({
     ...parsed.data,
     imageUrl,
     userId: session.userId,

@@ -1,6 +1,6 @@
 import { Pagination } from '@/components/pagination';
 import { ProductCard } from '@/components/ProductCard';
-import { getAdvertisements } from '@/lib/advertisements';
+import { getAds } from '@/lib/api/advertisements';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -37,7 +37,7 @@ export default async function Home(props: { searchParams: AdsPageSearchParams })
     items: products,
     currentPage,
     totalPages,
-  } = await getAdvertisements({ query, order, page, pageSize: PAGE_SIZE });
+  } = await getAds({ query, order, page, pageSize: PAGE_SIZE });
 
   return (
     <div className="pb-20 space-y-12">

@@ -3,7 +3,7 @@
 import { AuthFormState } from '../types';
 import prisma from '@/lib/prisma';
 import { hashPassword } from '../utils/securityService';
-import { getUserByEmail } from '@/lib/users';
+import { getUserByEmail } from '@/lib/api/users';
 import { registerSchema } from '@/lib/validation/authSchemas';
 import { getFieldErrorsFromTree } from '@/lib/validation';
 
@@ -64,6 +64,7 @@ export async function registerAction(
     };
   }
 
+  // TODO Llevarlo a lib/api/users
   await prisma.user.create({
     data: {
       email,

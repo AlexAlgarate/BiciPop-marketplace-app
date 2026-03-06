@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getProductById } from '@/lib/advertisements';
+import { getAdById } from '@/lib/api/advertisements';
 import { ProductDetailView } from './ProductDetailView';
 import { Metadata } from 'next';
 
@@ -12,7 +12,7 @@ export const generateMetadata = async (props: {
 }): Promise<Metadata> => {
   const { id } = await props.params;
 
-  const product = await getProductById(Number(id));
+  const product = await getAdById(Number(id));
 
   return {
     title: product
@@ -26,7 +26,7 @@ export const generateMetadata = async (props: {
 
 const ProductDetailPage = async (props: { params: ProductDetailParams }) => {
   const { id } = await props.params;
-  const product = await getProductById(Number(id));
+  const product = await getAdById(Number(id));
 
   if (!product) return notFound();
 

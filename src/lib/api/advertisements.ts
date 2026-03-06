@@ -1,5 +1,5 @@
-import prisma from './prisma';
-import { AdDTO, AdsResultDto, CreateAdDTO } from './ads.types';
+import prisma from '../prisma';
+import { AdDTO, AdsResultDto, CreateAdDTO } from '../ads.types';
 
 interface AdsFilter {
   query: string;
@@ -55,7 +55,7 @@ function getWhereClause(query: string) {
   };
 }
 
-export async function getAdvertisements({
+export async function getAds({
   query,
   order,
   page,
@@ -91,7 +91,7 @@ export async function getAdvertisements({
   };
 }
 
-export const getProductById = async (id: number): Promise<AdDTO | null> => {
+export const getAdById = async (id: number): Promise<AdDTO | null> => {
   const ad = await prisma.advertisement.findUnique({
     where: { id },
     include: {
@@ -105,7 +105,7 @@ export const getProductById = async (id: number): Promise<AdDTO | null> => {
   return mapToAdDTO(ad);
 };
 
-export const createAdvertisement = async (data: CreateAdDTO): Promise<AdDTO> => {
+export const createAd = async (data: CreateAdDTO): Promise<AdDTO> => {
   const ad = await prisma.advertisement.create({
     data: {
       title: data.title,

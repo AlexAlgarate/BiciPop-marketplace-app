@@ -1,4 +1,4 @@
-import { getCategories } from '@/lib/categories';
+import { getAdCategories } from '@/lib/api/categories';
 
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/auth';
@@ -13,7 +13,7 @@ const CreateAdPage = async () => {
     redirect('/auth/login?callbackUrl=/products/create');
   }
 
-  const categories = await getCategories();
+  const categories = await getAdCategories();
 
   return (
     <div className="container mx-auto px-4 py-8">
