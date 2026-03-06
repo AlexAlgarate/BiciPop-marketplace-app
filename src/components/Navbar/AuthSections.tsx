@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ThemeToggle } from '../theme-toggle';
-import { logout } from '@/app/auth/logout/route';
 import { Button } from '../ui/Button';
+import { logout } from '@/app/auth/actions';
 
 export interface AuthSectionsProps {
   isAuthenticated: boolean;
