@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { type ReactNode, useActionState, useEffect } from 'react';
 import { AuthFormState, initialRegisterState } from '../types';
 import { FormField } from './FormField';
 import { Button } from '@/components/ui/Button';
@@ -17,9 +17,10 @@ interface Props {
   action: (_prevState: AuthFormState, formData: FormData) => Promise<AuthFormState>;
   fields: FieldConfig[];
   submitText: string;
+  footer?: ReactNode;
 }
 
-export const AuthForm = ({ action, fields, submitText }: Props) => {
+export const AuthForm = ({ action, fields, submitText, footer }: Props) => {
   const router = useRouter();
   const [state, formAction] = useActionState(action, initialRegisterState);
 
@@ -55,6 +56,8 @@ export const AuthForm = ({ action, fields, submitText }: Props) => {
       >
         {submitText}
       </Button>
+
+      {footer && <div>{footer}</div>}
 
       {state.message && (
         <p

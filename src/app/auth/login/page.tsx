@@ -1,3 +1,4 @@
+import { AuthFooter } from '../components/AuthFooter';
 import { AuthForm } from '../components/AuthForm';
 import { loginAction } from './actions';
 
@@ -27,6 +28,13 @@ const LoginPage = () => {
               placeholder: 'Mín 8 caracteres',
             },
           ]}
+          footer={
+            <AuthFooter
+              footerText="¿No tienes una cuenta? "
+              href="/auth/register"
+              linkText="Regístrate aquí"
+            />
+          }
         />
       </div>
     </div>

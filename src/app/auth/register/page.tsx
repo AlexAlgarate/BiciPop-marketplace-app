@@ -1,3 +1,4 @@
+import { AuthFooter } from '../components/AuthFooter';
 import { AuthForm } from '../components/AuthForm';
 import { registerAction } from './actions';
 
@@ -41,6 +42,13 @@ const RegisterPage = () => {
               placeholder: 'Mín. 8 caracteres, incluye mayúsculas y minúsculas',
             },
           ]}
+          footer={
+            <AuthFooter
+              footerText="¿Ya tienes una cuenta? "
+              href="/auth/login"
+              linkText="Inicia sesión"
+            />
+          }
         />
       </div>
     </div>
