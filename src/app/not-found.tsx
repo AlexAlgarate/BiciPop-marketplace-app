@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { SearchX } from 'lucide-react';
 
-const ProductNotFound = () => {
+const PageNotFound = () => {
   return (
     <div className="min-h-[calc(75vh-64px)] flex items-center justify-center px-4">
       <div className="text-center max-w-md p-4 border border-border rounded-lg shadow-sm">
@@ -12,10 +12,10 @@ const ProductNotFound = () => {
         </div>
 
         <h2 className="text-2xl font-bold text-foreground mb-3">
-          Producto no encontrado
+          Página no encontrada
         </h2>
         <p className="text-muted-foreground mb-8">
-          El producto que buscas no existe o ha sido eliminado por su propietario.
+          No existe la página que estás buscando.
         </p>
 
         <Link
@@ -26,11 +26,11 @@ const ProductNotFound = () => {
           rounded-lg transition-colors
           "
         >
-          Volver al listado de productos
+          Volver a la página de inicio
         </Link>
       </div>
     </div>
   );
 };
 
-export default ProductNotFound;
+export default PageNotFound;
