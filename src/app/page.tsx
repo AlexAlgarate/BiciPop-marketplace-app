@@ -7,7 +7,7 @@ import {
 } from '@/features/all-products/utils/searchParams';
 import { Suspense } from 'react';
 import { ProductsGrid } from '@/features/all-products/components/GridProducts';
-import { ProductsGridSkeleton } from '@/components/ProductsGridSkeleton';
+import { ProductsGridSkeleton } from '@/features/all-products/components/ProductsGridSkeleton';
 
 export const metadata: Metadata = {
   title: 'BiciPop',
