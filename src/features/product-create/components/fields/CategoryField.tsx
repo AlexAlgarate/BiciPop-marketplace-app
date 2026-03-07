@@ -1,5 +1,5 @@
-import { Category } from '@/app/products/types';
 import { FieldError } from '@/components/FieldError';
+import { Category } from '../../types';
 
 interface CategorySelectFieldProps {
   categories: Category[];

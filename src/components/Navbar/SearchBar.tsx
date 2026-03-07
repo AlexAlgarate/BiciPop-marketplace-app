@@ -12,7 +12,8 @@ export const SearchBar = () => {
   const router = useRouter();
 
   const [value, setValue] = useState(searchParams.get('query') ?? '');
-  const debounce = useRef<ReturnType<typeof setTimeout>>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const applySearch = (query: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -26,23 +27,25 @@ export const SearchBar = () => {
     params.set('page', '1');
 
     router.replace(`${pathname}?${params.toString()}`);
+
+    requestAnimationFrame(() => inputRef.current?.focus());
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = e.target.value;
     setValue(next);
 
-    if (debounce.current) {
-      clearTimeout(debounce.current);
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
     }
 
-    debounce.current = setTimeout(() => applySearch(next), DEBOUNCE_MS);
+    debounceRef.current = setTimeout(() => applySearch(next), DEBOUNCE_MS);
   };
 
   const handleClear = () => {
     setValue('');
-    if (debounce.current) {
-      clearTimeout(debounce.current);
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
     }
 
     applySearch('');
@@ -50,8 +53,8 @@ export const SearchBar = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      if (debounce.current) {
-        clearTimeout(debounce.current);
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
       }
 
       applySearch(value);
@@ -61,7 +64,7 @@ export const SearchBar = () => {
   return (
     <div className="flex-1 max-w-2xl relative hidden md:block">
       <input
-        key={searchParams.get('query') ?? ''}
+        // key={searchParams.get('query') ?? ''}
         type="text"
         placeholder="Buscar productos..."
         value={value}
