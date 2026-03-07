@@ -1,19 +1,6 @@
-import { AdDTO } from '@/domain/ads/types';
-import prisma from '../prisma';
+import prisma from '../../lib/prisma';
 import { mapToAdDTO } from '@/domain/ads/mappers';
-
-interface AdsFilter {
-  query: string;
-  order: 'asc' | 'desc';
-  page: number;
-  pageSize: number;
-}
-export interface AdsResultDto {
-  items: AdDTO[];
-  totalCount: number;
-  totalPages: number;
-  currentPage: number;
-}
+import { AdsFilter, AdsResultDto } from './types';
 
 function getWhereClause(query: string) {
   if (!query) {
@@ -63,17 +50,3 @@ export async function getAds({
     currentPage,
   };
 }
-
-export const getAdById = async (id: number): Promise<AdDTO | null> => {
-  const ad = await prisma.advertisement.findUnique({
-    where: { id },
-    include: {
-      category: true,
-      user: true,
-    },
-  });
-
-  if (!ad) return null;
-
-  return mapToAdDTO(ad);
-};
