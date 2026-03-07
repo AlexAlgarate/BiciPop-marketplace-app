@@ -1,7 +1,9 @@
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { ProductDetailView } from '@/features/product/components/ProductDetailView';
 import { getAdById } from '@/features/product/api';
+import { Suspense } from 'react';
+import { ProductDetail } from '@/features/product/components/ProductDetail';
+import { SingleProductSkeleton } from '@/features/product/components/SingleProductSkeleton';
 
 type ProductDetailParams = Promise<{
   id: string;
@@ -26,11 +28,14 @@ export const generateMetadata = async (props: {
 
 const ProductDetailPage = async (props: { params: ProductDetailParams }) => {
   const { id } = await props.params;
-  const product = await getAdById(Number(id));
 
-  if (!product) return notFound();
-
-  return <ProductDetailView product={product} />;
+  return (
+    <ProductDetailView>
+      <Suspense fallback={<SingleProductSkeleton />}>
+        <ProductDetail id={Number(id)} />
+      </Suspense>
+    </ProductDetailView>
+  );
 };
 
 export default ProductDetailPage;

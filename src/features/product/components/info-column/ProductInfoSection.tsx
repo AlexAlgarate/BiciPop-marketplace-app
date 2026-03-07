@@ -1,9 +1,9 @@
-import { AdDTO } from '@/lib/types/ads.types';
 import { ProductHeader } from './product-header/ProductHeader';
 import { AdManagementPanel } from './ActionButtons';
 import { ContactSellerButton } from './ContactSellerButton';
 import { SellerCard } from './SellerCard';
 import { formatCreatedDate, formatPrice } from '@/features/product/formatters';
+import { AdDTO } from '@/domain/ads/types';
 
 interface ProductInfoProps {
   product: AdDTO;

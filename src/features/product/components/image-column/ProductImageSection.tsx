@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { AdDTO } from '@/lib/types/ads.types';
 import { ProductDescription } from './ProductDescriptionSection';
+import { AdDTO } from '@/domain/ads/types';
 
 interface ProductImageSectionProps {
   product: AdDTO;
