@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/Button';
 import { Trash2 } from 'lucide-react';
-import { deleteAdAction } from '../actions';
+import { deleteAdAction } from '../../../../app/products/[id]/actions';
 import { useState } from 'react';
 
 interface Props {

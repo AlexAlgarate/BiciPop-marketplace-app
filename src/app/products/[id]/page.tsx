@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getAdById } from '@/lib/api/advertisements';
-import { ProductDetailView } from './ProductDetailView';
 import { Metadata } from 'next';
+import { ProductDetailView } from '@/features/product/components/ProductDetailView';
 
 type ProductDetailParams = Promise<{
   id: string;

@@ -1,8 +1,7 @@
 import { AdDTO } from '@/lib/types/ads.types';
-
-import { ProductImageSection } from './components/ProductImageSection';
-import { BackToHomeLink } from './components/BackToHomeLink';
-import { ProductInfoSection } from './components/ProductInfoSection';
+import { ProductImageSection } from './image-column/ProductImageSection';
+import { ProductInfoSection } from './info-column/ProductInfoSection';
+import { BackToHomeLink } from '@/components/BackToHomeLink';
 
 interface Props {
   product: AdDTO;
