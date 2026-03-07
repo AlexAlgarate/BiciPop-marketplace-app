@@ -1,3 +1,13 @@
+export interface CreateAdDTO {
+  title: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  categoryId: number;
+  location: string;
+  userId: string;
+}
+
 export type ProductFormState = {
   success: boolean;
   message: string;

@@ -1,5 +1,6 @@
+import { AdDTO } from '@/domain/ads/types';
 import prisma from '../prisma';
-import { AdDTO, AdsResultDto, CreateAdDTO } from '../types/ads.types';
+import { mapToAdDTO } from '@/domain/ads/mappers';
 
 interface AdsFilter {
   query: string;
@@ -7,40 +8,12 @@ interface AdsFilter {
   page: number;
   pageSize: number;
 }
-
-type AdvertisementWithRelations = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-  userId: string;
-  categoryId: number;
-  location: string;
-  likes: number;
-  createdAt: Date;
-  updatedAt: Date;
-  category: { name: string };
-  user: { username: string };
-};
-
-const mapToAdDTO = (ad: AdvertisementWithRelations): AdDTO => {
-  return {
-    id: ad.id,
-    title: ad.title,
-    description: ad.description,
-    price: ad.price,
-    imageUrl: ad.imageUrl,
-    userId: ad.userId,
-    categoryId: ad.categoryId,
-    location: ad.location,
-    likes: ad.likes,
-    createdAt: ad.createdAt,
-    updatedAt: ad.updatedAt,
-    category: ad.category.name,
-    userName: ad.user.username,
-  };
-};
+export interface AdsResultDto {
+  items: AdDTO[];
+  totalCount: number;
+  totalPages: number;
+  currentPage: number;
+}
 
 function getWhereClause(query: string) {
   if (!query) {
@@ -102,24 +75,5 @@ export const getAdById = async (id: number): Promise<AdDTO | null> => {
 
   if (!ad) return null;
 
-  return mapToAdDTO(ad);
-};
-
-export const createAd = async (data: CreateAdDTO): Promise<AdDTO> => {
-  const ad = await prisma.advertisement.create({
-    data: {
-      title: data.title,
-      description: data.description,
-      price: data.price,
-      imageUrl: data.imageUrl,
-      location: data.location,
-      userId: data.userId,
-      categoryId: data.categoryId,
-    },
-    include: {
-      category: true,
-      user: true,
-    },
-  });
   return mapToAdDTO(ad);
 };

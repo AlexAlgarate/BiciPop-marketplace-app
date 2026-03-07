@@ -2,12 +2,13 @@
 
 import { useActionState, useEffect, useState } from 'react';
 import { createAdAction } from '../actions';
-import { Category, ProductFormState } from '../../types';
+
 import { CreateProductButton } from './CreateProductButton';
 import { FormField } from './fields/FormField';
 import { ImageUploadField } from './fields/ImageUploadField';
 import { CategorySelectField } from './fields/CategoryField';
 import { useRouter } from 'next/navigation';
+import { Category, ProductFormState } from '../types';
 
 interface CreateAdFormProps {
   categories: Category[];

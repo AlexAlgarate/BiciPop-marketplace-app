@@ -14,19 +14,18 @@ export interface AdDTO {
   userName: string;
 }
 
-export interface AdsResultDto {
-  items: AdDTO[];
-  totalCount: number;
-  totalPages: number;
-  currentPage: number;
-}
-
-export interface CreateAdDTO {
+export type AdvertisementWithRelations = {
+  id: number;
   title: string;
   description: string;
   price: number;
   imageUrl: string;
+  userId: string;
   categoryId: number;
   location: string;
-  userId: string;
-}
+  likes: number;
+  createdAt: Date;
+  updatedAt: Date;
+  category: { name: string };
+  user: { username: string };
+};
