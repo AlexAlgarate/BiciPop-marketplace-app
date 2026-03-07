@@ -23,9 +23,9 @@ const LoginPage = () => {
             },
             {
               name: 'password',
-              label: 'Password',
+              label: 'Contraseña',
               type: 'password',
-              placeholder: 'Mín 8 caracteres',
+              placeholder: 'Mín 8 caracteres, una mayúscula y un número',
             },
           ]}
           footer={

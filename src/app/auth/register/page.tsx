@@ -20,7 +20,7 @@ const RegisterPage = () => {
           fields={[
             {
               name: 'username',
-              label: 'Username',
+              label: 'Nombre de usuario',
               placeholder: 'Ej: Juanperez23',
               type: 'text',
             },
@@ -32,14 +32,14 @@ const RegisterPage = () => {
             },
             {
               name: 'location',
-              label: 'Location',
+              label: 'Localidad',
               placeholder: 'Ej: Guadalajara',
             },
             {
               name: 'password',
-              label: 'Password',
+              label: 'Introduce tu contraseña',
               type: 'password',
-              placeholder: 'Mín. 8 caracteres, incluye mayúsculas y minúsculas',
+              placeholder: 'Mín 8 caracteres, una mayúscula y un número',
             },
           ]}
           footer={
