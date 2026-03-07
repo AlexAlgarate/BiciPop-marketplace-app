@@ -1,6 +1,6 @@
 import { AuthFooter } from '../../../features/auth/components/AuthFooter';
 import { AuthForm } from '../../../features/auth/components/AuthForm';
-import { loginAction } from './actions';
+import { loginAction } from '../../../features/auth/actions';
 
 const LoginPage = () => {
   return (
