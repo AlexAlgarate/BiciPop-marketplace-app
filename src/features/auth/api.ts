@@ -24,3 +24,19 @@ export const getAuthUserByEmail = async (email: string): Promise<AuthUser | null
     },
   });
 };
+
+export const createUser = async (
+  email: string,
+  username: string,
+  passwordHash: string,
+  location: string,
+): Promise<void> => {
+  await prisma.user.create({
+    data: {
+      email,
+      username,
+      passwordHash,
+      location,
+    },
+  });
+};

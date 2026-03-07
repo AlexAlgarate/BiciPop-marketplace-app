@@ -1,11 +1,14 @@
 'use server';
 
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
 import { AuthFormState } from '@/features/auth/types';
 import { comparePassword, hashPassword } from './security';
-import { getAuthUserByEmail, getUserByEmail } from '@/features/auth/api';
 import { createSession } from '@/lib/auth';
-import { loginSchema, registerSchema } from '@/features/auth/validation';
+import { getAuthUserByEmail, getUserByEmail, createUser } from '@/features/auth/api';
 import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
+import { loginSchema, registerSchema } from '@/features/auth/validation';
 
 export async function loginAction(
   _prevState: AuthFormState,
@@ -110,15 +113,7 @@ export async function registerAction(
     };
   }
 
-  // TODO Llevarlo a lib/api/users
-  await prisma.user.create({
-    data: {
-      email,
-      username,
-      passwordHash,
-      location,
-    },
-  });
+  await createUser(email, username, passwordHash, location);
 
   return {
     success: true,
@@ -127,10 +122,6 @@ export async function registerAction(
     values: {},
   };
 }
-
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import prisma from '@/lib/prisma';
 
 export const logout = async () => {
   const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME ?? 'session-token';
