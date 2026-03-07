@@ -1,10 +1,10 @@
 'use server';
 
-import { AuthFormState } from '../types';
+import { AuthFormState } from '../../../features/auth/types';
 import prisma from '@/lib/prisma';
-import { hashPassword } from '../utils/securityService';
-import { getUserByEmail } from '@/lib/api/users';
-import { registerSchema } from '@/lib/validations/auth-schemas';
+import { hashPassword } from '../../../features/auth/security';
+import { getUserByEmail } from '@/features/auth/api';
+import { registerSchema } from '@/features/auth/validation';
 import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 
 export async function registerAction(

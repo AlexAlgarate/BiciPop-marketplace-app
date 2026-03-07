@@ -1,5 +1,5 @@
-import { AuthFooter } from '../components/AuthFooter';
-import { AuthForm } from '../components/AuthForm';
+import { AuthFooter } from '../../../features/auth/components/AuthFooter';
+import { AuthForm } from '../../../features/auth/components/AuthForm';
 import { loginAction } from './actions';
 
 const LoginPage = () => {

@@ -1,10 +1,11 @@
 'use client';
 
 import { type ReactNode, useActionState, useEffect } from 'react';
-import { AuthFormState, initialRegisterState } from '../types';
+import { useRouter } from 'next/navigation';
+
 import { FormField } from './FormField';
 import { Button } from '@/components/ui/Button';
-import { useRouter } from 'next/navigation';
+import { AuthFormState, initialRegisterState } from '../types';
 
 type FieldConfig = {
   name: string;

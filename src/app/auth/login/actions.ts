@@ -1,10 +1,10 @@
 'use server';
 
-import { AuthFormState } from '../types';
-import { comparePassword } from '../utils/securityService';
-import { getAuthUserByEmail } from '@/lib/api/users';
-import { createSession } from '@/lib/auth/auth';
-import { loginSchema } from '@/lib/validations/auth-schemas';
+import { AuthFormState } from '@/features/auth/types';
+import { comparePassword } from '../../../features/auth/security';
+import { getAuthUserByEmail } from '@/features/auth/api';
+import { createSession } from '@/lib/auth';
+import { loginSchema } from '@/features/auth/validation';
 import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 
 export async function loginAction(

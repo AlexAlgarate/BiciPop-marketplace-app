@@ -1,7 +1,7 @@
 import { getAdCategories } from '@/lib/api/categories';
 
 import { redirect } from 'next/navigation';
-import { getSession } from '@/lib/auth/auth';
+import { getSession } from '@/lib/auth';
 import { CreateAdForm } from './components/CreateProductForm';
 import { BackToHomeLink } from '@/components/BackToHomeLink';
 

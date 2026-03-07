@@ -1,3 +1,14 @@
+export interface UserDto {
+  id: string;
+  email: string;
+}
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  passwordHash: string;
+}
+
 export type AuthFormState = {
   success: boolean;
   message: string;
@@ -14,14 +25,5 @@ export const initialRegisterState: AuthFormState = {
     password: '',
     location: '',
     username: '',
-  },
-};
-
-export const initialLoginState: AuthFormState = {
-  success: false,
-  errors: {},
-  message: '',
-  values: {
-    email: '',
   },
 };

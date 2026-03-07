@@ -1,4 +1,4 @@
-import { getSession } from '@/lib/auth/auth';
+import { getSession } from '@/lib/auth';
 import { DeleteAdButton } from './DeleteAdButton';
 import { EditAdButton } from './EditAdButton';
 

@@ -1,6 +1,6 @@
 'use server';
 
-import { getSession } from '@/lib/auth/auth';
+import { getSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { ProductFormState } from '../types';
 import { createAd } from '@/lib/api/advertisements';
