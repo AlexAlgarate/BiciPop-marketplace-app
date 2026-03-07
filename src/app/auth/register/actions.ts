@@ -4,8 +4,8 @@ import { AuthFormState } from '../types';
 import prisma from '@/lib/prisma';
 import { hashPassword } from '../utils/securityService';
 import { getUserByEmail } from '@/lib/api/users';
-import { registerSchema } from '@/lib/validation/authSchemas';
-import { getFieldErrorsFromTree } from '@/lib/validation';
+import { registerSchema } from '@/lib/validations/auth-schemas';
+import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 
 export async function registerAction(
   _prevState: AuthFormState,

@@ -1,5 +1,5 @@
 import prisma from '../prisma';
-import { AuthUser, UserDto } from '../user.types';
+import { AuthUser, UserDto } from '../types/user.types';
 
 export const getUserByEmail = async (email: string): Promise<UserDto | null> => {
   const userDb = await prisma.user.findUnique({

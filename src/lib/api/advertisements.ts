@@ -1,5 +1,5 @@
 import prisma from '../prisma';
-import { AdDTO, AdsResultDto, CreateAdDTO } from '../ads.types';
+import { AdDTO, AdsResultDto, CreateAdDTO } from '../types/ads.types';
 
 interface AdsFilter {
   query: string;

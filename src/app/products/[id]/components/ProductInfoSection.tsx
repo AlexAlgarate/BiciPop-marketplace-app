@@ -1,5 +1,5 @@
-import { AdDTO } from '@/lib/ads.types';
-import { formatCreatedDate, formatPrice } from '../formatters';
+import { AdDTO } from '@/lib/types/ads.types';
+import { formatCreatedDate, formatPrice } from '../../../../utils/formatters';
 import { ProductHeader } from './header/ProductHeader';
 import { AdManagementPanel } from './AdManagementPanel';
 import { ContactSellerButton } from './ContactSellerButton';

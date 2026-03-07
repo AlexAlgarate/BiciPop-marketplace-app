@@ -1,4 +1,4 @@
-import { Pagination } from '@/components/pagination';
+import { Pagination } from '@/components/Pagination';
 import { ProductCard } from '@/components/ProductCard';
 import { getAds } from '@/lib/api/advertisements';
 import { Metadata } from 'next';

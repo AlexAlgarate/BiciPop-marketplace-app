@@ -4,8 +4,8 @@ import { AuthFormState } from '../types';
 import { comparePassword } from '../utils/securityService';
 import { getAuthUserByEmail } from '@/lib/api/users';
 import { createSession } from '@/lib/auth/auth';
-import { loginSchema } from '@/lib/validation/authSchemas';
-import { getFieldErrorsFromTree } from '@/lib/validation';
+import { loginSchema } from '@/lib/validations/auth-schemas';
+import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 
 export async function loginAction(
   _prevState: AuthFormState,

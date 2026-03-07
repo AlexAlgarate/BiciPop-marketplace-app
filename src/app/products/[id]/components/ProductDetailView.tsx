@@ -1,4 +1,4 @@
-import { AdDTO } from '@/lib/ads.types';
+import { AdDTO } from '@/lib/types/ads.types';
 
 import { ProductImageSection } from './components/ProductImageSection';
 import { BackToHomeLink } from './components/BackToHomeLink';

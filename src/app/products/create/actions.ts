@@ -6,8 +6,8 @@ import { ProductFormState } from '../types';
 import { createAd } from '@/lib/api/advertisements';
 import { saveImageInPublic } from '@/lib/uploads';
 import { revalidatePath } from 'next/cache';
-import { createAdSchema } from '@/lib/validation/productSchemas';
-import { getFieldErrorsFromTree } from '@/lib/validation';
+import { createAdSchema } from '@/lib/validations/product-schemas';
+import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 
 export const createAdAction = async (
   _previousState: ProductFormState,
