@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 import { saveImageInPublic } from '@/lib/uploads';
-import { createAdSchema } from '@/lib/validations/product-schemas';
+import { createAdSchema } from '@/features/product-create/validation';
 import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 import { createAd } from '@/features/product-create/api';
 import { ProductFormState } from './types';
