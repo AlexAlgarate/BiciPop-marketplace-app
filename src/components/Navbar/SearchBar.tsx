@@ -6,16 +6,20 @@ import { useRef, useState } from 'react';
 
 const DEBOUNCE_MS = 400;
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  mobileOpen?: boolean;
+}
+
+export const SearchBar = ({ mobileOpen = false }: SearchBarProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   const [value, setValue] = useState(searchParams.get('query') ?? '');
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const applySearch = (query: string) => {
+  function applySearch(query: string) {
     const params = new URLSearchParams(searchParams.toString());
 
     if (query.trim()) {
@@ -25,61 +29,53 @@ export const SearchBar = () => {
     }
 
     params.set('page', '1');
-
     router.replace(`${pathname}?${params.toString()}`);
-
     requestAnimationFrame(() => inputRef.current?.focus());
-  };
+  }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const next = e.target.value;
     setValue(next);
 
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-
+    if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => applySearch(next), DEBOUNCE_MS);
-  };
+  }
 
-  const handleClear = () => {
+  function handleClear() {
     setValue('');
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-
+    if (debounceRef.current) clearTimeout(debounceRef.current);
     applySearch('');
-  };
+  }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
-
+      if (debounceRef.current) clearTimeout(debounceRef.current);
       applySearch(value);
     }
-  };
+  }
 
   return (
-    <div className="flex-1 max-w-2xl relative hidden md:block">
+    <div
+      className={`relative ${mobileOpen ? 'block w-full' : 'flex-1 max-w-2xl hidden md:block'}`}
+    >
       <input
-        // key={searchParams.get('query') ?? ''}
+        ref={inputRef}
         type="text"
-        placeholder="Buscar productos..."
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        className="w-full py-2.5 pl-10 pr-4 bg-secondary text-foreground rounded-full placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+        placeholder="Buscar productos..."
+        autoFocus={mobileOpen}
+        className="w-full py-2.5 pl-10 pr-8 bg-secondary text-foreground rounded-full placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
       />
-      <Search className="w-4 h-4 text-muted absolute left-3.5 top-3.5" />
+      <Search className="w-4 h-4 text-muted absolute left-3.5 top-3.5 pointer-events-none" />
       {value && (
         <button
           onClick={handleClear}
-          aria-label="Clean search"
-          className="absolute right-3.5 top-3 text-muted-foreground hover:text-foreground"
+          aria-label="Limpiar búsqueda"
+          className="absolute right-3.5 top-3 text-muted-foreground hover:text-foreground transition-colors"
         >
-          <X className="w-4 h-4 cursor-pointer" />
+          <X className="w-4 h-4" />
         </button>
       )}
     </div>
