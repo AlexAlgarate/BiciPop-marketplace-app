@@ -1,4 +1,20 @@
+import { mapToAdDTO } from '@/domain/ads/mappers';
+import { AdDTO } from '@/domain/ads/types';
 import prisma from '@/lib/prisma';
+
+export const getAdById = async (id: number): Promise<AdDTO | null> => {
+  const ad = await prisma.advertisement.findUnique({
+    where: { id },
+    include: {
+      category: true,
+      user: true,
+    },
+  });
+
+  if (!ad) return null;
+
+  return mapToAdDTO(ad);
+};
 
 export const getAdByOwner = async (
   adId: number,
