@@ -5,7 +5,7 @@ import { timeAgo } from '@/utils/date';
 import Link from 'next/link';
 import { Button } from './ui/Button';
 
-interface ProductCardProps {
+type ProductCardProps = {
   id: number;
   title: string;
   description: string;
@@ -17,7 +17,7 @@ interface ProductCardProps {
   userName: string;
   createdAt: Date | string;
   updatedAt: Date | string;
-}
+};
 
 const formatPrice = (price: number) => {
   return new Intl.NumberFormat('es-ES', {

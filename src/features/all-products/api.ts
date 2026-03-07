@@ -21,6 +21,7 @@ export async function getAds({
   page,
   pageSize,
 }: AdsFilter): Promise<AdsResultDto> {
+  await new Promise((resolve) => setTimeout(resolve, 1500));
   const safePage = Number.isNaN(page) || page < 1 ? 1 : page;
   const safePageSize = Number.isNaN(pageSize) || pageSize < 1 ? 5 : pageSize;
 
