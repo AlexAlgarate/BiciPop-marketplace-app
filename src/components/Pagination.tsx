@@ -12,12 +12,12 @@ interface PaginationProps {
 export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const { push } = useRouter();
 
   const createPageUrl = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', pageNumber.toString());
-    replace(`${pathname}?${params.toString()}`);
+    push(`${pathname}?${params.toString()}`);
   };
 
   const allPages = generatePagination(currentPage, totalPages);

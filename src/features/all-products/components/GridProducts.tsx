@@ -12,7 +12,7 @@ export const ProductsGrid = async ({ query, order, page }: AdsSearchParams) => {
     totalPages,
   } = await getAds({ query, order, page, pageSize: PRODUCTS_PER_PAGE });
 
-  if (products.length === 0) return <EmptyState />;
+  if (products.length === 0) return <EmptyState query={query} />;
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
