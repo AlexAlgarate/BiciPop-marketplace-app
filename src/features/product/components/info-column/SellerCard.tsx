@@ -6,7 +6,7 @@ interface VendorProp {
 
 export const SellerCard = ({ username }: VendorProp) => {
   return (
-    <div className="bg-secondary/30 p-4 rounded-xl flex items-center justify-between border border-border">
+    <div className="p-4 flex items-center justify-between">
       <div className="flex items-center gap-3">
         <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 border border-gray-300">
           <User className="w-6 h-6" />

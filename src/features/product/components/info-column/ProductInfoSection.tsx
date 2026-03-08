@@ -1,6 +1,5 @@
 import { ProductHeader } from './product-header/ProductHeader';
 import { AdManagementPanel } from './ActionButtons';
-import { ContactSellerButton } from './ContactSellerButton';
 import { SellerCard } from './SellerCard';
 import { formatCreatedDate, formatPrice } from '@/features/product/formatters';
 import { ProductDTO } from '@/domain/products/types';
@@ -15,7 +14,7 @@ export const ProductInfoSection = ({ product }: { product: ProductInfoProps }) =
   const publishedAgo = formatCreatedDate(product.createdAt);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="bg-secondary/30 border border-border rounded-xl overflow-hidden">
       <ProductHeader
         title={product.title}
         price={price}
@@ -27,11 +26,13 @@ export const ProductInfoSection = ({ product }: { product: ProductInfoProps }) =
         isOwner={product.isOwner}
       />
 
-      <div className="h-px bg-border w-full" />
+      <div className="border-t border-border">
+        <SellerCard username={product.userName} />
+      </div>
 
-      <SellerCard username={product.userName} />
-      <ContactSellerButton />
-      <AdManagementPanel adId={product.id} ownerId={product.userId} />
+      <div className="border-t border-border">
+        <AdManagementPanel adId={product.id} ownerId={product.userId} />
+      </div>
     </div>
   );
 };

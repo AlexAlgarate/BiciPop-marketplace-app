@@ -28,7 +28,7 @@ export const ProductHeader = async ({
   const isAuthenticated = !!session?.userId;
 
   return (
-    <div className="space-y-2">
+    <div className="p-5 space-y-3">
       <div className="flex justify-between items-start">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
           {title}
