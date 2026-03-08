@@ -3,7 +3,7 @@ import { ProductsGridSkeleton } from '@/features/all-products/components/Product
 import {
   AdsPageSearchParams,
   parseAdsSearchParams,
-} from '@/features/all-products/utils/searchParams';
+} from '@/features/user-products/utils/searchParams';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { UserProductsGrid } from '@/features/user-products/components/GridUserProducts';
@@ -23,7 +23,7 @@ const MyProductsPage = async ({
   const params = parseAdsSearchParams(await searchParams);
 
   return (
-    <AllProductsView>
+    <AllProductsView searchParams={params}>
       <Suspense fallback={<ProductsGridSkeleton />}>
         <UserProductsGrid {...params} />
       </Suspense>
