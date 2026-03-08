@@ -40,6 +40,7 @@ const RegisterPage = () => {
               label: 'Introduce tu contraseña',
               type: 'password',
               placeholder: 'Mín 8 caracteres, una mayúscula y un número',
+              showPasswordRules: true,
             },
           ]}
           footer={

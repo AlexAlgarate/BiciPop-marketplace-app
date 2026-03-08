@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 
 import { FieldError } from '@/components/FieldError';
@@ -11,6 +11,8 @@ type Props = {
   defaultValue?: string;
   error?: string | string[];
   placeholder: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  clientError?: boolean;
 };
 
 export function FormField({
@@ -20,11 +22,15 @@ export function FormField({
   defaultValue,
   error,
   placeholder,
+  onChange,
+  clientError,
 }: Props) {
   const isPassword = type === 'password';
   const [showPassword, setShowPassword] = useState(false);
 
   const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
+
+  const hasError = !!error || clientError;
 
   return (
     <div className="space-y-1">
@@ -44,10 +50,11 @@ export function FormField({
             'bg-white dark:bg-background',
             'text-foreground placeholder:text-muted-foreground',
             isPassword ? 'pr-10' : '',
-            error
+            hasError
               ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500'
               : 'border-gray-300 dark:border-border focus:outline-none focus:ring-2 focus:ring-primary/20',
           ].join(' ')}
+          onChange={onChange}
         />
 
         {isPassword && (
@@ -55,7 +62,7 @@ export function FormField({
             type="button"
             onClick={() => setShowPassword((value) => !value)}
             aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar constraseña'}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
           >
             {showPassword ? (
               <EyeOff className="w-4 h-4" />
