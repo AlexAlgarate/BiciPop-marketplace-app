@@ -1,15 +1,4 @@
-type SearchParamValue = string | string[] | undefined;
-
-export type AdsPageSearchParams = Promise<Record<string, SearchParamValue>>;
-
-export type AdsSearchParams = {
-  query: string;
-  order: 'asc' | 'desc';
-  page: number;
-  category: number | undefined;
-  minPrice: number | undefined;
-  maxPrice: number | undefined;
-};
+import { SearchParamValue, AdsSearchParams } from '../types/search-params.types';
 
 const getSingleSearchParam = (value: SearchParamValue): string | undefined => {
   if (Array.isArray(value)) return value[0];

@@ -1,6 +1,25 @@
 import { HeroSection } from './HeroSection';
+import { FiltersPanel } from './FiltersPanel';
+import { getCategories } from '@/features/shared/api/get-categories';
 
-export const AllProductsView = ({ children }: { children: React.ReactNode }) => {
+interface AllProductsViewProps {
+  children: React.ReactNode;
+  searchParams?: {
+    toString?: () => string;
+    query?: string;
+    order?: string;
+    category?: number;
+    minPrice?: number;
+    maxPrice?: number;
+  };
+}
+
+export const AllProductsView = async ({
+  children,
+  searchParams,
+}: AllProductsViewProps) => {
+  const categories = await getCategories();
+
   return (
     <div className="pb-20 space-y-12">
       <HeroSection />
@@ -9,7 +28,18 @@ export const AllProductsView = ({ children }: { children: React.ReactNode }) => 
         <h2 className="text-2xl font-bold text-foreground tracking-tight mb-8">
           Novedades en BiciPop
         </h2>
-        {children}
+
+        <div className="flex gap-8 items-start">
+          <div className="hidden lg:block w-64 shrink-0 sticky top-6">
+            <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+              <FiltersPanel
+                key={searchParams?.toString?.() ?? 'default'}
+                categories={categories}
+              />
+            </div>
+          </div>
+          <div className="flex-1 min-w-0">{children}</div>
+        </div>
       </section>
     </div>
   );

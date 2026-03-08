@@ -1,9 +1,7 @@
 import { AllProductsView } from '@/features/user-products/components/AllProductsView';
 import { ProductsGridSkeleton } from '@/features/all-products/components/ProductsGridSkeleton';
-import {
-  AdsPageSearchParams,
-  parseAdsSearchParams,
-} from '@/features/user-products/utils/searchParams';
+import { AdsPageSearchParams } from '@/features/shared/types/search-params.types';
+import { parseAdsSearchParams } from '@/features/shared/utils/parse-search-params';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { UserProductsGrid } from '@/features/user-products/components/GridUserProducts';

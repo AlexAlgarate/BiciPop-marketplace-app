@@ -1,16 +1,16 @@
 import { Pagination } from '@/components/Pagination';
 import { ProductCard } from '@/components/ProductCard';
 import { EmptyState } from './EmptyState';
-import { getUserAds } from '../api';
-import { AdsSearchParams } from '../utils/searchParams';
+import { getUserProducts } from '../api';
 import { PRODUCTS_PER_PAGE } from '@/utils/constants';
+import { AdsSearchParams } from '@/features/shared/types/search-params.types';
 
 export const UserProductsGrid = async (params: AdsSearchParams) => {
   const {
     items: products,
     currentPage,
     totalPages,
-  } = await getUserAds({
+  } = await getUserProducts({
     ...params,
     pageSize: PRODUCTS_PER_PAGE,
   });

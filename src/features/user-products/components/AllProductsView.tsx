@@ -1,7 +1,7 @@
 import { HeroSectionUser } from './HeroSectionUser';
-import { FiltersPanel } from './FiltersPanel';
-import { AdsSearchParams } from '../utils/searchParams';
-import { getCategories } from '../api';
+import { FiltersPanel } from '@/features/all-products/components/FiltersPanel';
+import { getCategories } from '@/features/shared/api/get-categories';
+import { AdsSearchParams } from '@/features/shared/types/search-params.types';
 
 interface AllProductsViewProps {
   children: React.ReactNode;

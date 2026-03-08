@@ -1,4 +1,4 @@
-export interface FilterUserProducts {
+export interface FilterProducts {
   query: string;
   order: 'asc' | 'desc';
   page: number;
