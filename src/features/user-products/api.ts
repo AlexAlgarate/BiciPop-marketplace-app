@@ -34,13 +34,16 @@ export const getUserProducts = async (filters: FilterProducts) => {
     safePage,
     safePageSize,
     filters.order,
+    session.userId,
   );
 
   const totalPages = Math.max(1, Math.ceil(totalProjects / safePageSize));
   const currentPage = Math.min(safePage, totalPages);
 
   return {
-    items: items.map(mapToAdDTO),
+    items: items.map((item) =>
+      mapToAdDTO(item as unknown as Parameters<typeof mapToAdDTO>[0]),
+    ),
     totalCount: totalProjects,
     totalPages,
     currentPage,

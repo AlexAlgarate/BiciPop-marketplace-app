@@ -1,9 +1,13 @@
 'use client';
+
 import Image from 'next/image';
-import { MapPin, Clock, Heart, User } from 'lucide-react';
-import { timeAgo } from '@/utils/date';
 import Link from 'next/link';
+import { useOptimistic, useTransition } from 'react';
+import { MapPin, Clock, Heart, User } from 'lucide-react';
+
+import { toggleFavoriteAction } from '@/features/product/actions';
 import { Button } from './ui/Button';
+import { timeAgo } from '@/utils/date';
 
 type ProductCardProps = {
   id: number;
@@ -17,6 +21,8 @@ type ProductCardProps = {
   userName: string;
   createdAt: Date | string;
   updatedAt: Date | string;
+  isLiked?: boolean;
+  isOwner?: boolean;
 };
 
 const formatPrice = (price: number) => {
@@ -54,6 +60,31 @@ const ProductInfo = ({ product }: { product: ProductCardProps }) => {
       ? new Date(product.createdAt)
       : product.createdAt;
 
+  const [optimisticLikes, setOptimisticLikes] = useOptimistic(
+    { likes: product.likes, isLiked: product.isLiked ?? false },
+    (state, action: { likes: number; isLiked: boolean }) => action,
+  );
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleLikeClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (product.isOwner || isPending) return;
+
+    startTransition(async () => {
+      try {
+        const result = await toggleFavoriteAction(product.id);
+        setOptimisticLikes({ likes: result.likesCount, isLiked: result.liked });
+      } catch (error) {
+        console.error('[Error toggling favorite]', error);
+      }
+    });
+  };
+
+  const isDisabled = product.isOwner || isPending;
+
   return (
     <div className="flex flex-col flex-1 p-4">
       <div className="flex justify-between items-start gap-3 mb-2">
@@ -71,6 +102,30 @@ const ProductInfo = ({ product }: { product: ProductCardProps }) => {
       <p className="text-sm text-gray-500 line-clamp-2 mb-4 leading-relaxed h-10">
         {product.description}
       </p>
+
+      <Button
+        onClick={handleLikeClick}
+        disabled={isDisabled}
+        aria-label={optimisticLikes.isLiked ? 'Ya te gusta' : 'Me gusta'}
+        className={`flex gap-1.5 bg-foreground backdrop-blur-md shadow-sm
+        px-2.5 py-1.5 w-full text-gray-700 hover:text-red-500 hover:bg-white ${
+          optimisticLikes.isLiked ? 'text-red-500' : ''
+        }`}
+        title={
+          product.isOwner
+            ? 'No puedes dar like a tu propio producto'
+            : optimisticLikes.isLiked
+              ? 'Ya has dado like'
+              : 'Dar like'
+        }
+      >
+        <Heart
+          className={`w-3.5 h-3.5 transition-colors ${
+            optimisticLikes.isLiked ? 'fill-current' : ''
+          }`}
+        />
+        <p className="text-xs font-semibold">{formatLikes(optimisticLikes.likes)}</p>
+      </Button>
 
       <div className="mt-auto flex items-center justify-between pt-3 border-t border-gray-100">
         <div className="flex items-center gap-2 min-w-0">
@@ -98,27 +153,11 @@ const ProductInfo = ({ product }: { product: ProductCardProps }) => {
 };
 
 const ProductImage = ({ product }: { product: ProductCardProps }) => {
-  const handleClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log('Liked ->', product.id);
-  };
-
   return (
     <div className="relative w-full aspect-square overflow-hidden bg-gray-100 border-b border-border">
       <span className="absolute top-3 left-3 z-10 bg-white/70 backdrop-blur-md px-2.5 py-1 text-xs uppercase font-bold rounded-full tracking-wide text-gray-700 shadow-sm">
         {product.category}
       </span>
-
-      <Button
-        onClick={handleClick}
-        aria-label="Like product"
-        className="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-quite/90 backdrop-blur-md
-        px-2.5 py-1.5 text-gray-700 shadow-sm hover:text-red-500 hover:bg-white "
-      >
-        <Heart className="w-3.5 h-3.5 transition-colors" />
-        <p className="text-xs font-semibold">{formatLikes(product.likes)}</p>
-      </Button>
 
       <Image
         src={product.imageUrl}

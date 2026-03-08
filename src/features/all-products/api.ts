@@ -1,8 +1,8 @@
-import { mapToAdDTO } from '@/domain/ads/mappers';
 import { AdsResultDto } from './types';
 import { getPagination, getWhereClause } from '../shared/utils/build-filters';
 import { FilterProducts } from '../shared/types/filter.types';
 import { findUsers } from '../shared/api/get-products';
+import { getSession } from '@/lib/auth';
 
 export async function getProducts(filters: FilterProducts): Promise<AdsResultDto> {
   await new Promise((resolve) => setTimeout(resolve, 100));
@@ -16,18 +16,22 @@ export async function getProducts(filters: FilterProducts): Promise<AdsResultDto
     filters.maxPrice,
   );
 
+  const session = await getSession();
+  const userId = session?.userId ?? null;
+
   const { items, totalProjects } = await findUsers(
     whereClause,
     safePage,
     safePageSize,
     filters.order,
+    userId,
   );
 
   const totalPages = Math.max(1, Math.ceil(totalProjects / safePageSize));
   const currentPage = Math.min(safePage, totalPages);
 
   return {
-    items: items.map(mapToAdDTO),
+    items: items as unknown as AdsResultDto['items'],
     totalCount: totalProjects,
     totalPages,
     currentPage,
