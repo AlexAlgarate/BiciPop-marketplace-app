@@ -1,4 +1,3 @@
-import { mapToAdDTO } from '@/domain/ads/mappers';
 import { getSession } from '@/lib/auth';
 import { getPagination, getWhereClause } from '../shared/utils/build-filters';
 import { FilterProducts } from '../shared/types/filter.types';
@@ -41,9 +40,7 @@ export const getUserProducts = async (filters: FilterProducts) => {
   const currentPage = Math.min(safePage, totalPages);
 
   return {
-    items: items.map((item) =>
-      mapToAdDTO(item as unknown as Parameters<typeof mapToAdDTO>[0]),
-    ),
+    items,
     totalCount: totalProjects,
     totalPages,
     currentPage,
