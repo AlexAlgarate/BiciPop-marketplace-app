@@ -9,7 +9,7 @@ interface MenuOptionsProps {
 export const MenuOptions = ({ onItemClick }: MenuOptionsProps) => {
   const menuItems = [
     {
-      href: '/products/my-ads',
+      href: '/products/my-products',
       label: 'Mis anuncios',
       icon: LayoutList,
     },

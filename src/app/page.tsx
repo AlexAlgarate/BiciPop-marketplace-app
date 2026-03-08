@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 import { AllProductsView } from '@/features/all-products/components/AllProductsView';
-import { AdsPageSearchParams } from '@/features/shared/types/search-params.types';
-import { parseAdsSearchParams } from '@/features/shared/utils/parse-search-params';
+import { ProductsPageSearchParams } from '@/features/shared/types/search-params.types';
+import { parseProductsSearchParams } from '@/features/shared/utils/parse-search-params';
 import { Suspense } from 'react';
 import { ProductsGrid } from '@/features/all-products/components/GridProducts';
 import { ProductsGridSkeleton } from '@/features/all-products/components/ProductsGridSkeleton';
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 export default async function Home({
   searchParams,
 }: {
-  searchParams: AdsPageSearchParams;
+  searchParams: ProductsPageSearchParams;
 }) {
-  const params = parseAdsSearchParams(await searchParams);
+  const params = parseProductsSearchParams(await searchParams);
 
   return (
     <AllProductsView searchParams={params}>

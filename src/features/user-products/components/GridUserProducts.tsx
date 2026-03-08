@@ -3,9 +3,9 @@ import { ProductCard } from '@/components/ProductCard';
 import { EmptyState } from './EmptyState';
 import { getUserProducts } from '../api';
 import { PRODUCTS_PER_PAGE } from '@/utils/constants';
-import { AdsSearchParams } from '@/features/shared/types/search-params.types';
+import { ProductsSearchParams } from '@/features/shared/types/search-params.types';
 
-export const UserProductsGrid = async (params: AdsSearchParams) => {
+export const UserProductsGrid = async (params: ProductsSearchParams) => {
   const {
     items: products,
     currentPage,

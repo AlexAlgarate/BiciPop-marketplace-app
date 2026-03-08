@@ -7,7 +7,7 @@ datasource db {
   provider = "postgresql"
 }
 
-model Advertisement {
+model Product {
   id          Int      @id @default(autoincrement())
   title       String
   description String
@@ -22,6 +22,7 @@ model Advertisement {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   favorites   Favorite[]
+
 }
 
 model User {
@@ -30,7 +31,7 @@ model User {
   email        String    @unique
   passwordHash String
   userImage    String?
-  ads          Advertisement[]
+  products          Product[]
   location     String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -40,15 +41,15 @@ model User {
 model Category {
   id          Int       @id @default(autoincrement())
   name        String    @unique
-  ads         Advertisement[]
+  products         Product[]
 }
 
 model Favorite {
   userId          String
-  advertisementId Int
+  productId Int
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  advertisement   Advertisement @relation(fields: [advertisementId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt       DateTime      @default(now())
 
-  @@id([userId, advertisementId])
+  @@id([userId, productId])
 }

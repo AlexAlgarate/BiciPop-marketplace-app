@@ -1,7 +1,7 @@
-import { AdDTO } from '@/domain/ads/types';
+import { ProductDTO } from '@/domain/products/types';
 
-export interface AdsResultDto {
-  items: AdDTO[];
+export interface ProductsResultDto {
+  items: ProductDTO[];
   totalCount: number;
   totalPages: number;
   currentPage: number;

@@ -1,8 +1,8 @@
 export type SearchParamValue = string | string[] | undefined;
 
-export type AdsPageSearchParams = Promise<Record<string, SearchParamValue>>;
+export type ProductsPageSearchParams = Promise<Record<string, SearchParamValue>>;
 
-export type AdsSearchParams = {
+export type ProductsSearchParams = {
   query: string;
   order: 'asc' | 'desc';
   page: number;

@@ -2,10 +2,10 @@ import { Pagination } from '@/components/Pagination';
 import { ProductCard } from '@/components/ProductCard';
 import { EmptyState } from './EmptyState';
 import { getProducts } from '../api';
-import { AdsSearchParams } from '../../shared/types/search-params.types';
+import { ProductsSearchParams } from '../../shared/types/search-params.types';
 import { PRODUCTS_PER_PAGE } from '@/utils/constants';
 
-export const ProductsGrid = async (params: AdsSearchParams) => {
+export const ProductsGrid = async (params: ProductsSearchParams) => {
   const {
     items: products,
     currentPage,

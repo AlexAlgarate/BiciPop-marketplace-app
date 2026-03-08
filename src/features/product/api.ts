@@ -1,13 +1,13 @@
 import { cache } from 'react';
 
-import { mapToAdDTO } from '@/domain/ads/mappers';
-import { AdDTO } from '@/domain/ads/types';
+import { mapToAdDTO } from '@/domain/products/mappers';
+import { ProductDTO } from '@/domain/products/types';
 import prisma from '@/lib/prisma';
 
-export const getAdById = cache(async (id: number): Promise<AdDTO | null> => {
+export const getAdById = cache(async (id: number): Promise<ProductDTO | null> => {
   await new Promise((resolve) => setTimeout(resolve, 100));
 
-  const ad = await prisma.advertisement.findUnique({
+  const ad = await prisma.product.findUnique({
     where: { id },
     include: {
       category: true,
@@ -24,25 +24,25 @@ export const getAdByOwner = async (
   adId: number,
   userId: string,
 ): Promise<{ id: number } | null> => {
-  return prisma.advertisement.findUnique({
+  return prisma.product.findUnique({
     where: { id: adId, userId },
     select: { id: true },
   });
 };
 
 export const deleteAd = async (adId: number) => {
-  return prisma.advertisement.delete({ where: { id: adId } });
+  return prisma.product.delete({ where: { id: adId } });
 };
 
 export const toggleFavorite = async (
   userId: string,
-  advertisementId: number,
+  productId: number,
 ): Promise<{ liked: boolean; likesCount: number }> => {
   const existingFavorite = await prisma.favorite.findUnique({
     where: {
-      userId_advertisementId: {
+      userId_productId: {
         userId,
-        advertisementId,
+        productId,
       },
     },
   });
@@ -50,9 +50,9 @@ export const toggleFavorite = async (
   if (existingFavorite) {
     await prisma.favorite.delete({
       where: {
-        userId_advertisementId: {
+        userId_productId: {
           userId,
-          advertisementId,
+          productId,
         },
       },
     });
@@ -60,13 +60,13 @@ export const toggleFavorite = async (
     await prisma.favorite.create({
       data: {
         userId,
-        advertisementId,
+        productId,
       },
     });
   }
 
   const likesCount = await prisma.favorite.count({
-    where: { advertisementId },
+    where: { productId },
   });
 
   return { liked: !existingFavorite, likesCount };
@@ -76,8 +76,8 @@ export const getAdWithFavoriteStatus = cache(
   async (
     id: number,
     userId: string | null,
-  ): Promise<(AdDTO & { isLiked: boolean; isOwner: boolean }) | null> => {
-    const ad = await prisma.advertisement.findUnique({
+  ): Promise<(ProductDTO & { isLiked: boolean; isOwner: boolean }) | null> => {
+    const ad = await prisma.product.findUnique({
       where: { id },
       include: {
         category: true,
@@ -91,16 +91,16 @@ export const getAdWithFavoriteStatus = cache(
       userId !== null
         ? !!(await prisma.favorite.findUnique({
             where: {
-              userId_advertisementId: {
+              userId_productId: {
                 userId,
-                advertisementId: id,
+                productId: id,
               },
             },
           }))
         : false;
 
     const likesCount = await prisma.favorite.count({
-      where: { advertisementId: id },
+      where: { productId: id },
     });
 
     return {

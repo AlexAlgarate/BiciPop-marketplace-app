@@ -1,4 +1,4 @@
-export interface AdDTO {
+export interface ProductDTO {
   id: number;
   title: string;
   description: string;
@@ -14,7 +14,7 @@ export interface AdDTO {
   userName: string;
 }
 
-export type AdvertisementWithRelations = {
+export type ProductWithRelations = {
   id: number;
   title: string;
   description: string;

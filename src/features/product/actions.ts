@@ -28,7 +28,7 @@ export const toggleFavoriteAction = async (
 
   const ad = await getAdByOwner(productId, session.userId);
   if (ad) {
-    throw new Error('Cannot like your own advertisement');
+    throw new Error('Cannot like your own product');
   }
 
   const result = await toggleFavorite(session.userId, productId);

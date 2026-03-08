@@ -1,6 +1,6 @@
 import { getSession } from '@/lib/auth';
-import { DeleteAdButton } from './DeleteAdButton';
-import { EditAdButton } from './EditAdButton';
+import { DeleteAdButton } from './DeleteProductButton';
+import { EditAdButton } from './EditProductButton';
 
 interface Props {
   adId: number;

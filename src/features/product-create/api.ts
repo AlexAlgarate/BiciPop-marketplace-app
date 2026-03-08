@@ -1,10 +1,10 @@
 import prisma from '@/lib/prisma';
 import { CreateAdDTO } from './types';
-import { AdDTO } from '@/domain/ads/types';
-import { mapToAdDTO } from '@/domain/ads/mappers';
+import { ProductDTO } from '@/domain/products/types';
+import { mapToAdDTO } from '@/domain/products/mappers';
 
-export const createAd = async (data: CreateAdDTO): Promise<AdDTO> => {
-  const ad = await prisma.advertisement.create({
+export const createAd = async (data: CreateAdDTO): Promise<ProductDTO> => {
+  const ad = await prisma.product.create({
     data: {
       title: data.title,
       description: data.description,

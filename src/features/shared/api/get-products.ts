@@ -1,8 +1,8 @@
 import prisma from '@/lib/prisma';
 import { WhereClause } from '../utils/build-filters';
-import { AdDTO } from '@/domain/ads/types';
+import { ProductDTO } from '@/domain/products/types';
 
-export type AdWithFavoriteStatus = AdDTO & {
+export type AdWithFavoriteStatus = ProductDTO & {
   isLiked: boolean;
   isOwner: boolean;
 };
@@ -14,9 +14,9 @@ export const findUsers = async (
   order: 'asc' | 'desc',
   userId: string | null,
 ): Promise<{ items: AdWithFavoriteStatus[]; totalProjects: number }> => {
-  const totalProjects = await prisma.advertisement.count({ where: whereClause });
+  const totalProjects = await prisma.product.count({ where: whereClause });
 
-  const items = await prisma.advertisement.findMany({
+  const items = await prisma.product.findMany({
     where: whereClause,
     skip: (page - 1) * pageSize,
     take: pageSize,
@@ -35,16 +35,16 @@ export const findUsers = async (
         userId !== null
           ? !!(await prisma.favorite.findUnique({
               where: {
-                userId_advertisementId: {
+                userId_productId: {
                   userId,
-                  advertisementId: item.id,
+                  productId: item.id,
                 },
               },
             }))
           : false;
 
       const likesCount = await prisma.favorite.count({
-        where: { advertisementId: item.id },
+        where: { productId: item.id },
       });
 
       return {

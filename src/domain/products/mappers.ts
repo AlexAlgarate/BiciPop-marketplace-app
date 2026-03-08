@@ -1,6 +1,6 @@
-import { AdDTO, AdvertisementWithRelations } from './types';
+import { ProductDTO, ProductWithRelations } from './types';
 
-export const mapToAdDTO = (ad: AdvertisementWithRelations): AdDTO => {
+export const mapToAdDTO = (ad: ProductWithRelations): ProductDTO => {
   return {
     id: ad.id,
     title: ad.title,

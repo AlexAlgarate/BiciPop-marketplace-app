@@ -1,13 +1,13 @@
-import { SearchParamValue, AdsSearchParams } from '../types/search-params.types';
+import { SearchParamValue, ProductsSearchParams } from '../types/search-params.types';
 
 const getSingleSearchParam = (value: SearchParamValue): string | undefined => {
   if (Array.isArray(value)) return value[0];
   return value;
 };
 
-export const parseAdsSearchParams = (
+export const parseProductsSearchParams = (
   searchParams: Record<string, SearchParamValue>,
-): AdsSearchParams => {
+): ProductsSearchParams => {
   const rawMinPrice = Number(getSingleSearchParam(searchParams.minPrice));
   const rawMaxPrice = Number(getSingleSearchParam(searchParams.maxPrice));
   const rawCategory = Number(getSingleSearchParam(searchParams.category));

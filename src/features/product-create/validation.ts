@@ -1,6 +1,6 @@
 import z from 'zod';
 
-export const createAdSchema = z.object({
+export const createProductSchema = z.object({
   title: z
     .string()
     .min(1, 'El título es obligatorio')

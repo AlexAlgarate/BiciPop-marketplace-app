@@ -10,7 +10,7 @@ const pool = new Pool({
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
-type AdSeed = {
+type ProductSeed = {
   title: string;
   description: string;
   price: number;
@@ -20,7 +20,7 @@ type AdSeed = {
 async function main() {
   console.log('🌱 Seeding...');
 
-  await prisma.advertisement.deleteMany();
+  await prisma.product.deleteMany();
   await prisma.category.deleteMany();
   await prisma.user.deleteMany();
 
@@ -106,7 +106,7 @@ async function main() {
     ),
   );
 
-  const adsData: AdSeed[] = [
+  const productsData: ProductSeed[] = [
     // Carretera
     {
       title: 'Specialized Allez Elite',
@@ -298,14 +298,14 @@ async function main() {
     'https://images.unsplash.com/photo-1630736701814-4778b0ab30e6',
   ];
   for (const user of users) {
-    for (let i = 0; i < adsData.length; i++) {
-      const ad = adsData[i];
+    for (let i = 0; i < productsData.length; i++) {
+      const ad = productsData[i];
 
       const categoryId = categoryMap.get(ad.category);
 
       if (!categoryId) throw new Error(`Category not found: ${ad.category}`);
 
-      await prisma.advertisement.create({
+      await prisma.product.create({
         data: {
           title: ad.title,
           description: ad.description,

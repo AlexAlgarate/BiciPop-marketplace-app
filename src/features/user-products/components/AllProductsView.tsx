@@ -1,11 +1,11 @@
 import { HeroSectionUser } from './HeroSectionUser';
 import { FiltersPanel } from '@/features/all-products/components/FiltersPanel';
 import { getCategories } from '@/features/shared/api/get-categories';
-import { AdsSearchParams } from '@/features/shared/types/search-params.types';
+import { ProductsSearchParams } from '@/features/shared/types/search-params.types';
 
 interface AllProductsViewProps {
   children: React.ReactNode;
-  searchParams: AdsSearchParams;
+  searchParams: ProductsSearchParams;
 }
 
 export const AllProductsView = async ({

@@ -3,9 +3,9 @@ import { AdManagementPanel } from './ActionButtons';
 import { ContactSellerButton } from './ContactSellerButton';
 import { SellerCard } from './SellerCard';
 import { formatCreatedDate, formatPrice } from '@/features/product/formatters';
-import { AdDTO } from '@/domain/ads/types';
+import { ProductDTO } from '@/domain/products/types';
 
-interface ProductInfoProps extends AdDTO {
+interface ProductInfoProps extends ProductDTO {
   isLiked: boolean;
   isOwner: boolean;
 }

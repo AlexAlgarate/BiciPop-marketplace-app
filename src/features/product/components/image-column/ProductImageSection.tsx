@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { ProductDescription } from './ProductDescriptionSection';
-import { AdDTO } from '@/domain/ads/types';
+import { ProductDTO } from '@/domain/products/types';
 
 interface ProductImageSectionProps {
-  product: AdDTO;
+  product: ProductDTO;
 }
 export const ProductImageSection = ({ product }: ProductImageSectionProps) => {
   return (

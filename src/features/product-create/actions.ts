@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 import { saveImageInPublic } from '@/lib/uploads';
-import { createAdSchema } from '@/features/product-create/validation';
+import { createProductSchema } from '@/features/product-create/validation';
 import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 import { createAd } from '@/features/product-create/api';
 import { ProductFormState } from './types';
@@ -26,7 +26,7 @@ export const createAdAction = async (
   const categoryIdInput = Number(formData.get('categoryId'));
   const image = formData.get('imageUrl') as File;
 
-  const parsed = createAdSchema.safeParse({
+  const parsed = createProductSchema.safeParse({
     title: titleInput,
     description: descriptionInput,
     location: locationInput,
