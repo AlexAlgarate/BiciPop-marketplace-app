@@ -33,3 +33,19 @@ export const getAdByOwner = async (
 export const deleteAd = async (adId: number) => {
   return prisma.advertisement.delete({ where: { id: adId } });
 };
+
+export const incrementProductLikes = async (productId: number): Promise<number> => {
+  const updated = await prisma.advertisement.update({
+    where: { id: productId },
+    data: {
+      likes: {
+        increment: 1,
+      },
+    },
+    select: {
+      likes: true,
+    },
+  });
+
+  return updated.likes;
+};

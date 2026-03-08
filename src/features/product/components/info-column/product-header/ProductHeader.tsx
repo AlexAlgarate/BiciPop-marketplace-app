@@ -7,6 +7,8 @@ interface HeaderProps {
   price: string;
   location: string;
   publishedAgo: string;
+  likes: number;
+  productId: number;
 }
 
 export const ProductHeader = ({
@@ -14,6 +16,8 @@ export const ProductHeader = ({
   price,
   location,
   publishedAgo,
+  likes,
+  productId,
 }: HeaderProps) => {
   return (
     <div className="space-y-2">
@@ -23,7 +27,7 @@ export const ProductHeader = ({
         </h1>
         <div className="flex gap-2">
           <ShareButton />
-          <FavoriteButton />
+          <FavoriteButton initialLikes={likes} productId={productId} />
         </div>
       </div>
       <p className="text-4xl font-bold text-primary">{price}</p>

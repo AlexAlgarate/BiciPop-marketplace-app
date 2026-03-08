@@ -20,6 +20,8 @@ export const ProductInfoSection = ({ product }: ProductInfoProps) => {
         price={price}
         location={product.location}
         publishedAgo={publishedAgo}
+        likes={product.likes}
+        productId={product.id}
       />
 
       <div className="h-px bg-border w-full" />

@@ -40,13 +40,3 @@ model Category {
   name        String    @unique
   ads         Advertisement[]
 }
-
-// model Favorite {
-//   userId          String
-//   advertisementId Int
-//   user            User          @relation(fields: [userId], references: [id])
-//   advertisement   Advertisement @relation(fields: [advertisementId], references: [id])
-//   createdAt       DateTime @default(now())
-
-//   @@id([userId, advertisementId])
-// }
