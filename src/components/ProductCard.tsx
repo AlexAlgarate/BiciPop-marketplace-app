@@ -103,30 +103,13 @@ const ProductInfo = ({ product }: { product: ProductCardProps }) => {
         {product.description}
       </p>
 
-      <Button
-        onClick={handleLikeClick}
-        disabled={isDisabled}
-        aria-label={optimisticLikes.isLiked ? 'Ya te gusta' : 'Me gusta'}
-        className={`flex gap-1.5 bg-foreground backdrop-blur-md shadow-sm
-        px-2.5 py-1.5 w-full text-gray-700 hover:text-red-500 hover:bg-white ${
-          optimisticLikes.isLiked ? 'text-red-500' : ''
-        }`}
-        title={
-          product.isOwner
-            ? 'No puedes dar like a tu propio producto'
-            : optimisticLikes.isLiked
-              ? 'Ya has dado like'
-              : 'Dar like'
-        }
-      >
-        <Heart
-          className={`w-3.5 h-3.5 transition-colors ${
-            optimisticLikes.isLiked ? 'fill-current' : ''
-          }`}
-        />
-        <p className="text-xs font-semibold">{formatLikes(optimisticLikes.likes)}</p>
-      </Button>
-
+      <FavoriteButton
+        handleLikeClick={handleLikeClick}
+        isDisabled={isDisabled}
+        isLiked={optimisticLikes.isLiked}
+        likes={optimisticLikes.likes}
+        product={product.isOwner}
+      />
       <div className="mt-auto flex items-center justify-between pt-3 border-t border-gray-100">
         <div className="flex items-center gap-2 min-w-0">
           <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shrink-0 border border-gray-200">
@@ -168,5 +151,44 @@ const ProductImage = ({ product }: { product: ProductCardProps }) => {
         className="object-cover group-hover:scale-105 transition-transform duration-500"
       />
     </div>
+  );
+};
+
+interface FavoriteButtonProps {
+  handleLikeClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isDisabled: boolean;
+  isLiked: boolean;
+  likes: number;
+  product?: boolean;
+}
+
+const FavoriteButton = ({
+  handleLikeClick,
+  isDisabled,
+  isLiked,
+  likes,
+  product,
+}: FavoriteButtonProps) => {
+  return (
+    <Button
+      onClick={handleLikeClick}
+      disabled={isDisabled}
+      aria-label={isLiked ? 'Ya te gusta' : 'Me gusta'}
+      className={`flex items-center gap-1.5 bg-gray-200/50
+        px-2.5 py-1.5 text-gray-700 hover:text-red-500 hover:border-red-200
+        w-fit mb-2.5 shadow-sm ${isLiked ? 'text-red-500' : ''}`}
+      title={
+        product
+          ? 'No puedes dar like a tu propio producto'
+          : isLiked
+            ? 'Ya has dado like'
+            : 'Dar like'
+      }
+    >
+      <Heart
+        className={`w-3.5 h-3.5 transition-colors ${isLiked ? 'fill-current' : ''}`}
+      />
+      <p className="text-xs font-semibold">{formatLikes(likes)}</p>
+    </Button>
   );
 };

@@ -46,9 +46,10 @@ export const FavoriteButton = ({
     <Button
       onClick={handleClick}
       disabled={isDisabled}
-      className={`p-2 hover:bg-secondary text-muted-foreground ${
-        optimisticState.isLiked ? 'text-red-500' : 'hover:text-red-500'
-      }`}
+      className={`flex- flex-col items-center px-3
+        hover:bg-secondary text-muted-foreground ${
+          optimisticState.isLiked ? 'text-red-500' : 'hover:text-red-500'
+        }`}
       title={
         !isAuthenticated
           ? 'Inicia sesión para dar like'
@@ -57,9 +58,7 @@ export const FavoriteButton = ({
             : 'Toggle like'
       }
     >
-      <Heart
-        className={`w-5 h-5 ${optimisticState.isLiked ? 'fill-current' : ''}`}
-      />{' '}
+      <Heart className={`w-5 h-5 ${optimisticState.isLiked ? 'fill-current' : ''}`} />{' '}
       {optimisticState.likes}
     </Button>
   );
