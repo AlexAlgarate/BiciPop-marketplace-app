@@ -5,11 +5,12 @@ import { SellerCard } from './SellerCard';
 import { formatCreatedDate, formatPrice } from '@/features/product/formatters';
 import { AdDTO } from '@/domain/ads/types';
 
-interface ProductInfoProps {
-  product: AdDTO;
+interface ProductInfoProps extends AdDTO {
+  isLiked: boolean;
+  isOwner: boolean;
 }
 
-export const ProductInfoSection = ({ product }: ProductInfoProps) => {
+export const ProductInfoSection = ({ product }: { product: ProductInfoProps }) => {
   const price = formatPrice(product.price);
   const publishedAgo = formatCreatedDate(product.createdAt);
 
@@ -22,6 +23,8 @@ export const ProductInfoSection = ({ product }: ProductInfoProps) => {
         publishedAgo={publishedAgo}
         likes={product.likes}
         productId={product.id}
+        isLiked={product.isLiked}
+        isOwner={product.isOwner}
       />
 
       <div className="h-px bg-border w-full" />

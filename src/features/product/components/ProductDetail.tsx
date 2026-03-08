@@ -1,14 +1,18 @@
 import { notFound } from 'next/navigation';
-import { getAdById } from '../api';
+import { getAdWithFavoriteStatus } from '../api';
 import { ProductImageSection } from './image-column/ProductImageSection';
 import { ProductInfoSection } from './info-column/ProductInfoSection';
+import { getSession } from '@/lib/auth';
 
 interface Props {
   id: number;
 }
 
 export const ProductDetail = async ({ id }: Props) => {
-  const product = await getAdById(id);
+  const session = await getSession();
+  const userId = session?.userId ?? null;
+
+  const product = await getAdWithFavoriteStatus(id, userId);
 
   if (!product) return notFound();
 

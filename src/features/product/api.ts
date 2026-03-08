@@ -34,18 +34,80 @@ export const deleteAd = async (adId: number) => {
   return prisma.advertisement.delete({ where: { id: adId } });
 };
 
-export const incrementProductLikes = async (productId: number): Promise<number> => {
-  const updated = await prisma.advertisement.update({
-    where: { id: productId },
-    data: {
-      likes: {
-        increment: 1,
+export const toggleFavorite = async (
+  userId: string,
+  advertisementId: number,
+): Promise<{ liked: boolean; likesCount: number }> => {
+  const existingFavorite = await prisma.favorite.findUnique({
+    where: {
+      userId_advertisementId: {
+        userId,
+        advertisementId,
       },
-    },
-    select: {
-      likes: true,
     },
   });
 
-  return updated.likes;
+  if (existingFavorite) {
+    await prisma.favorite.delete({
+      where: {
+        userId_advertisementId: {
+          userId,
+          advertisementId,
+        },
+      },
+    });
+  } else {
+    await prisma.favorite.create({
+      data: {
+        userId,
+        advertisementId,
+      },
+    });
+  }
+
+  const likesCount = await prisma.favorite.count({
+    where: { advertisementId },
+  });
+
+  return { liked: !existingFavorite, likesCount };
 };
+
+export const getAdWithFavoriteStatus = cache(
+  async (
+    id: number,
+    userId: string | null,
+  ): Promise<(AdDTO & { isLiked: boolean; isOwner: boolean }) | null> => {
+    const ad = await prisma.advertisement.findUnique({
+      where: { id },
+      include: {
+        category: true,
+        user: true,
+      },
+    });
+
+    if (!ad) return null;
+
+    const isLiked =
+      userId !== null
+        ? !!(await prisma.favorite.findUnique({
+            where: {
+              userId_advertisementId: {
+                userId,
+                advertisementId: id,
+              },
+            },
+          }))
+        : false;
+
+    const likesCount = await prisma.favorite.count({
+      where: { advertisementId: id },
+    });
+
+    return {
+      ...mapToAdDTO(ad),
+      likes: likesCount,
+      isLiked,
+      isOwner: ad.userId === userId,
+    };
+  },
+);
