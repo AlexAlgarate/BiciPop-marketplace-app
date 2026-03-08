@@ -1,7 +1,13 @@
 import { SearchBar } from './SearchBar';
 import { LogoSection } from './LogoSection';
 import { MobileMenu } from './Mobilemenu';
-import { AuthSections, AuthSectionsProps } from './AuthSections';
+import { DesktopMenu } from './DesktopMenu';
+import { ThemeToggle } from '../theme-toggle';
+import Link from 'next/link';
+
+interface AuthSectionsProps {
+  isAuthenticated: boolean;
+}
 
 export const Navbar = ({ isAuthenticated }: AuthSectionsProps) => {
   return (
@@ -11,8 +17,18 @@ export const Navbar = ({ isAuthenticated }: AuthSectionsProps) => {
           <LogoSection />
         </div>
         {isAuthenticated && <SearchBar />}
-        <div className="hidden md:block shrink-0">
-          <AuthSections isAuthenticated={isAuthenticated} />
+        <div className="hidden md:flex items-center gap-3 shrink-0">
+          <ThemeToggle />
+          {isAuthenticated ? (
+            <DesktopMenu />
+          ) : (
+            <Link
+              href="/auth/login"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-sm"
+            >
+              Iniciar sesión
+            </Link>
+          )}
         </div>
 
         <MobileMenu isAuthenticated={isAuthenticated} />
