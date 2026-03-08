@@ -21,6 +21,7 @@ model Advertisement {
   likes       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  favorites   Favorite[]
 }
 
 model User {
@@ -33,10 +34,21 @@ model User {
   location     String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+  favorites    Favorite[]
 }
 
 model Category {
   id          Int       @id @default(autoincrement())
   name        String    @unique
   ads         Advertisement[]
+}
+
+model Favorite {
+  userId          String
+  advertisementId Int
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  advertisement   Advertisement @relation(fields: [advertisementId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+
+  @@id([userId, advertisementId])
 }
