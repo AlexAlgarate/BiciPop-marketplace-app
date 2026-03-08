@@ -1,7 +1,8 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { supabase } from './supabase';
 
-export const saveImageInPublic = async (file: File): Promise<string> => {
+export const saveImageInPublicDev = async (file: File): Promise<string> => {
   const extension = file.name.split('.').pop()?.toLowerCase() ?? 'bin';
   const filename = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
   const uploadDir = path.join(process.cwd(), 'public', 'uploads');
@@ -12,4 +13,25 @@ export const saveImageInPublic = async (file: File): Promise<string> => {
   await writeFile(uploadPath, Buffer.from(bytes));
 
   return `/uploads/${filename}`;
+};
+
+export const saveImageInPublic = async (file: File): Promise<string> => {
+  const BUCKET_NAME = 'products';
+
+  const extension = file.name.split('.').pop()?.toLowerCase() ?? 'bin';
+  const filename = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
+
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+
+  const { error } = await supabase.storage.from(BUCKET_NAME).upload(filename, buffer, {
+    contentType: file.type,
+    upsert: false,
+  });
+
+  if (error) throw new Error('Error al subir la imagen a Supabase');
+
+  const { data } = supabase.storage.from(BUCKET_NAME).getPublicUrl(filename);
+
+  return data.publicUrl;
 };
