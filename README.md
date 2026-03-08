@@ -69,7 +69,7 @@ AUTH_COOKIE_NAME="session-token"
 7. Inicia el servidor de desarrollo:
 
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 ## Scripts Disponibles
