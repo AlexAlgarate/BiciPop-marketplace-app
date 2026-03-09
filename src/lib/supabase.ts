@@ -8,8 +8,4 @@ if (!supabaseUrl) throw new Error('Error extracting env variables');
 if (!supabaseKey) throw new Error('Error extracting env variables');
 if (!supabaseServiceKey) throw new Error('Error extracting env variables');
 
-// export const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-// const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-
 export const supabase = createClient(supabaseUrl, supabaseServiceKey);
