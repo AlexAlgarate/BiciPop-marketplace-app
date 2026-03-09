@@ -21,7 +21,6 @@ export const saveImageInPublic = async (file: File): Promise<string> => {
   const extension = file.name.split('.').pop()?.toLowerCase() ?? 'bin';
   const filename = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
 
-  // ✅ Sube el File directamente, sin convertir a Buffer
   const { error } = await supabase.storage.from(BUCKET_NAME).upload(filename, file, {
     contentType: file.type,
     upsert: false,
