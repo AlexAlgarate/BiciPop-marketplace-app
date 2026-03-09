@@ -5,8 +5,6 @@ import { findUsers } from '../shared/api/get-products';
 import { getSession } from '@/lib/auth';
 
 export async function getProducts(filters: FilterProducts): Promise<ProductsResultDto> {
-  await new Promise((resolve) => setTimeout(resolve, 100));
-
   const { safePage, safePageSize } = getPagination(filters.page, filters.pageSize);
 
   const whereClause = getWhereClause(

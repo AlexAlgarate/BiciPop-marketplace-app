@@ -5,8 +5,6 @@ import { ProductDTO } from '@/domain/products/types';
 import prisma from '@/lib/prisma';
 
 export const getAdById = cache(async (id: number): Promise<ProductDTO | null> => {
-  await new Promise((resolve) => setTimeout(resolve, 100));
-
   const ad = await prisma.product.findUnique({
     where: { id },
     include: {

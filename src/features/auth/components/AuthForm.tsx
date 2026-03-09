@@ -31,10 +31,7 @@ export const AuthForm = ({ action, fields, submitText, footer }: Props) => {
 
   useEffect(() => {
     if (state.success) {
-      const time = setTimeout(() => {
-        router.push('/');
-      }, 1500);
-      return () => clearTimeout(time);
+      router.push('/');
     }
   }, [router, state.success]);
 

@@ -4,8 +4,6 @@ import { FilterProducts } from '../shared/types/filter.types';
 import { findUsers } from '../shared/api/get-products';
 
 export const getUserProducts = async (filters: FilterProducts) => {
-  await new Promise((resolve) => setTimeout(resolve, 100));
-
   const session = await getSession();
   if (!session?.userId) {
     return {
