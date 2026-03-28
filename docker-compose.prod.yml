@@ -1,0 +1,9 @@
+services:
+  bicipop-app:
+    build: .
+    container_name: bicipop_server
+    restart: unless-stopped
+    ports:
+      - '4002:3000'
+    env_file:
+      - .env
