@@ -44,7 +44,7 @@ export const MenuOptions = ({ onItemClick }: MenuOptionsProps) => {
         <form action={logout}>
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-red-500/10 transition-colors text-red-600 text-sm font-medium"
+            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-red-500/10 transition-colors text-red-600 text-sm font-medium cursor-pointer"
           >
             <LogOut className="w-4 h-4 shrink-0" />
             Cerrar sesión
