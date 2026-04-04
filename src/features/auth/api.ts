@@ -1,4 +1,4 @@
-import prisma from '../../lib/prisma';
+import prisma from '@/lib/prisma';
 import { AuthUser, UserDto } from './types';
 
 export const getUserByEmail = async (email: string): Promise<UserDto | null> => {

@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth';
-import { CreateAdForm } from '../../../features/product-create/components/CreateProductForm';
 import { BackToHomeLink } from '@/components/BackToHomeLink';
 import { getCategories } from '@/features/shared/api/get-categories';
+import { CreateAdForm } from '@/features/product-create/components/CreateProductForm';
 
 const CreateAdPage = async () => {
   const session = await getSession();

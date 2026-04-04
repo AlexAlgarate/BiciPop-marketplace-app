@@ -1,6 +1,6 @@
 import { registerAction } from '@/features/auth/actions';
-import { AuthFooter } from '../../../features/auth/components/AuthFooter';
-import { AuthForm } from '../../../features/auth/components/AuthForm';
+import { AuthFooter } from '@/features/auth/components/AuthFooter';
+import { AuthForm } from '@/features/auth/components/AuthForm';
 
 const RegisterPage = () => {
   return (
