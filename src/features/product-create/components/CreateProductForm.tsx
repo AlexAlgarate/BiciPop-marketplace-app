@@ -1,13 +1,12 @@
 'use client';
 
-import { useActionState, useEffect, useState } from 'react';
+import { useActionState, useState } from 'react';
 import { createAdAction } from '../actions';
 
 import { CreateProductButton } from './CreateProductButton';
 import { FormField } from './fields/FormField';
 import { ImageUploadField } from './fields/ImageUploadField';
 import { CategorySelectField } from './fields/CategoryField';
-import { useRouter } from 'next/navigation';
 import { Category, ProductFormState } from '../types';
 
 interface CreateAdFormProps {
@@ -21,7 +20,6 @@ const initialState: ProductFormState = {
 };
 
 export const CreateAdForm = ({ categories }: CreateAdFormProps) => {
-  const router = useRouter();
   const [state, formAction, isPending] = useActionState(createAdAction, initialState);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -29,12 +27,6 @@ export const CreateAdForm = ({ categories }: CreateAdFormProps) => {
     if (imageFile) formData.set('imageUrl', imageFile);
     return formAction(formData);
   };
-
-  useEffect(() => {
-    if (state.success) {
-      router.push(`/`);
-    }
-  }, [router, state.success]);
 
   return (
     <form

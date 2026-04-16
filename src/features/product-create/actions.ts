@@ -74,12 +74,8 @@ export const createAdAction = async (
     userId: session.userId,
   });
   revalidatePath(`/`);
+  redirect('/');
 
-  return {
-    success: true,
-    message: 'Anuncio creado exitosamente',
-    requestId: Date.now(),
-  };
 };
 
 const VALID_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/jpg']);
