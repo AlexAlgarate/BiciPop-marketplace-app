@@ -5,11 +5,11 @@ import { getSession } from './lib/auth';
 export async function proxy(request: NextRequest) {
   const token = await getSession();
 
-  if (!token && request.nextUrl.pathname.startsWith('/')) {
+  if (!token) {
     return NextResponse.redirect(new URL('/auth/login', request.url));
   }
 }
 
 export const config = {
-  matcher: ['/', '/products/:path*'],
+  matcher: ['/products/create'],
 };
