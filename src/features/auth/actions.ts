@@ -9,6 +9,7 @@ import { createSession } from '@/lib/auth';
 import { getAuthUserByEmail, getUserByEmail, createUser } from '@/features/auth/api';
 import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 import { loginSchema, registerSchema } from '@/features/auth/validation';
+import { revalidatePath } from 'next/cache';
 
 export async function loginAction(
   _prevState: AuthFormState,
@@ -129,5 +130,6 @@ export const logout = async () => {
   const cookieStore = await cookies();
 
   cookieStore.delete(AUTH_COOKIE_NAME);
+  revalidatePath('/');
   redirect('/');
 };
