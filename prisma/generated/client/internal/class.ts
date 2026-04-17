@@ -17,8 +17,8 @@ import type * as Prisma from "./prismaNamespace"
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.4.2",
-  "engineVersion": "94a226be1cf2967af2541cca5529f0f7ba866919",
+  "clientVersion": "7.6.0",
+  "engineVersion": "75cbdc1eb7150937890ad5465d861175c6624711",
   "activeProvider": "postgresql",
   "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Product {\n  id          Int        @id @default(autoincrement())\n  title       String\n  description String\n  price       Int\n  imageUrl    String\n  user        User       @relation(fields: [userId], references: [id])\n  userId      String\n  category    Category   @relation(fields: [categoryId], references: [id])\n  categoryId  Int\n  location    String\n  likes       Int        @default(0)\n  createdAt   DateTime   @default(now())\n  updatedAt   DateTime   @updatedAt\n  favorites   Favorite[]\n}\n\nmodel User {\n  id           String     @id @default(cuid())\n  username     String     @unique\n  email        String     @unique\n  passwordHash String\n  userImage    String?\n  products     Product[]\n  location     String\n  createdAt    DateTime   @default(now())\n  updatedAt    DateTime   @updatedAt\n  favorites    Favorite[]\n}\n\nmodel Category {\n  id       Int       @id @default(autoincrement())\n  name     String    @unique\n  products Product[]\n}\n\nmodel Favorite {\n  userId    String\n  productId Int\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)\n  createdAt DateTime @default(now())\n\n  @@id([userId, productId])\n}\n",
   "runtimeDataModel": {
