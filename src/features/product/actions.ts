@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 
 export const deleteAdAction = async (formData: FormData): Promise<never> => {
   const session = await getSession();
-  if (!session?.userId) redirect('/auth/login');
+  if (!session?.userId) redirect('/login');
 
   const adId = String(formData.get('adId'));
   const ad = await getAdByOwner(adId, session.userId);
@@ -24,7 +24,7 @@ export const toggleFavoriteAction = async (
   productId: string,
 ): Promise<{ liked: boolean; likesCount: number }> => {
   const session = await getSession();
-  if (!session?.userId) redirect('/auth/login');
+  if (!session?.userId) redirect('/login');
 
   const ad = await getAdByOwner(productId, session.userId);
   if (ad) {

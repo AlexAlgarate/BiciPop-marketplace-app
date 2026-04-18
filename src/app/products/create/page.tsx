@@ -8,7 +8,7 @@ const CreateAdPage = async () => {
   const session = await getSession();
 
   if (!session?.userId) {
-    redirect('/auth/login?callbackUrl=/products/create');
+    redirect('/login?callbackUrl=/products/create');
   }
 
   const categories = await getCategories();

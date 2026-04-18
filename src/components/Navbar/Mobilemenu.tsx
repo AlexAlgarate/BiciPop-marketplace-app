@@ -30,7 +30,7 @@ export const MobileMenu = ({ isAuthenticated }: MobileMenuProps) => {
     return (
       <div className="md:hidden shrink-0">
         <Link
-          href="/auth/login"
+          href="/login"
           className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-sm"
         >
           Iniciar sesión

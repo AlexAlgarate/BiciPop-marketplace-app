@@ -16,7 +16,7 @@ export const createAdAction = async (
 ): Promise<ProductFormState> => {
   const session = await getSession();
   if (!session?.userId) {
-    redirect('/auth/login');
+    redirect('/login');
   }
 
   const titleInput = String(formData.get('title'));
