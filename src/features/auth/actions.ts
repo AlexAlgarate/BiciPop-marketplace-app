@@ -5,8 +5,14 @@ import { redirect } from 'next/navigation';
 
 import { AuthFormState } from '@/features/auth/types';
 import { comparePassword, hashPassword } from './security';
-import { createSession } from '@/lib/auth';
-import { getAuthUserByEmail, getUserByEmail, createUser } from '@/features/auth/api';
+import { createSession, getSession } from '@/lib/auth';
+import {
+  getAuthUserByEmail,
+  getUserByEmail,
+  createUser,
+  deleteUser,
+  getUserById,
+} from '@/features/auth/api';
 import { getFieldErrorsFromTree } from '@/lib/validations/validation-errors';
 import { loginSchema, registerSchema } from '@/features/auth/validation';
 import { revalidatePath } from 'next/cache';
@@ -130,6 +136,29 @@ export const logout = async () => {
   const cookieStore = await cookies();
 
   cookieStore.delete(AUTH_COOKIE_NAME);
+  revalidatePath('/');
+  redirect('/');
+};
+
+export const deleteUserAccount = async () => {
+  const session = await getSession();
+
+  if (!session) {
+    throw new Error('No hay sesión activa');
+  }
+
+  const user = await getUserById(session.userId);
+
+  if (!user) {
+    throw new Error('Usuario no encontrado');
+  }
+
+  await deleteUser(user.email);
+
+  const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME ?? 'session-token';
+  const cookieStore = await cookies();
+  cookieStore.delete(AUTH_COOKIE_NAME);
+
   revalidatePath('/');
   redirect('/');
 };
