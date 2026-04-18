@@ -3,7 +3,7 @@ export interface CreateAdDTO {
   description: string;
   price: number;
   imageUrl: string;
-  categoryId: number;
+  categoryId: string;
   location: string;
   userId: string;
 }
@@ -16,4 +16,4 @@ export type ProductFormState = {
   values?: Record<string, string | number>;
 };
 
-export type Category = { id: number; name: string };
+export type Category = { id: string; name: string };

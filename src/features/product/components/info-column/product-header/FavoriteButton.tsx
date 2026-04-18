@@ -7,7 +7,7 @@ import { useOptimistic, useTransition } from 'react';
 
 interface LikeButtonProps {
   initialLikes: number;
-  productId: number;
+  productId: string;
   isLiked: boolean;
   isOwner: boolean;
   isAuthenticated: boolean;

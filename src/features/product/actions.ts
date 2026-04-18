@@ -9,7 +9,7 @@ export const deleteAdAction = async (formData: FormData): Promise<never> => {
   const session = await getSession();
   if (!session?.userId) redirect('/auth/login');
 
-  const adId = Number(formData.get('adId'));
+  const adId = String(formData.get('adId'));
   const ad = await getAdByOwner(adId, session.userId);
 
   if (!ad) redirect('/');
@@ -21,7 +21,7 @@ export const deleteAdAction = async (formData: FormData): Promise<never> => {
 };
 
 export const toggleFavoriteAction = async (
-  productId: number,
+  productId: string,
 ): Promise<{ liked: boolean; likesCount: number }> => {
   const session = await getSession();
   if (!session?.userId) redirect('/auth/login');

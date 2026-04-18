@@ -23,7 +23,7 @@ export const createAdAction = async (
   const descriptionInput = String(formData.get('description'));
   const locationInput = String(formData.get('location'));
   const priceInput = Number(formData.get('price'));
-  const categoryIdInput = Number(formData.get('categoryId'));
+  const categoryIdInput = String(formData.get('categoryId'));
   const image = formData.get('imageUrl') as File;
 
   const parsed = createProductSchema.safeParse({
@@ -75,7 +75,6 @@ export const createAdAction = async (
   });
   revalidatePath(`/`);
   redirect('/');
-
 };
 
 const VALID_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/jpg']);

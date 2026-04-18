@@ -9,7 +9,7 @@ interface HeaderProps {
   location: string;
   publishedAgo: string;
   likes: number;
-  productId: number;
+  productId: string;
   isLiked: boolean;
   isOwner: boolean;
 }

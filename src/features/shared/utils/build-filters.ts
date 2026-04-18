@@ -5,7 +5,7 @@ export type WhereClause = {
         gte?: number | undefined;
       }
     | undefined;
-  categoryId?: number | undefined;
+  categoryId?: string | undefined;
   title?:
     | {
         contains: string;
@@ -16,13 +16,13 @@ export type WhereClause = {
 
 export const getWhereClause = (
   query: string,
-  category?: number,
+  category?: string,
   minPrice?: number,
   maxPrice?: number,
 ): WhereClause => {
   return {
     ...(query && { title: { contains: query, mode: 'insensitive' as const } }),
-    ...(category && { categoryId: Number(category) }),
+    ...(category && { categoryId: category }),
     ...((minPrice || maxPrice) && {
       price: {
         ...(minPrice && { gte: minPrice }),

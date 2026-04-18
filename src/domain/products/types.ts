@@ -1,11 +1,11 @@
 export interface ProductDTO {
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;
   imageUrl: string;
   userId: string;
-  categoryId: number;
+  categoryId: string;
   location: string;
   likes: number;
   createdAt: Date;
@@ -15,13 +15,13 @@ export interface ProductDTO {
 }
 
 export type ProductWithRelations = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;
   imageUrl: string;
   userId: string;
-  categoryId: number;
+  categoryId: string;
   location: string;
   likes: number;
   createdAt: Date;

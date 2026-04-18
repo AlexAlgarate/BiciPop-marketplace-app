@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { deleteAdAction } from '../../actions';
 
 interface Props {
-  adId: number;
+  adId: string;
 }
 
 export const DeleteAdButton = ({ adId }: Props) => {

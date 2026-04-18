@@ -6,7 +6,7 @@ import { Search, SlidersHorizontal, X, ArrowUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 interface Category {
-  id: number;
+  id: string;
   name: string;
 }
 

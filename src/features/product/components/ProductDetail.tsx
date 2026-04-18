@@ -5,7 +5,7 @@ import { ProductInfoSection } from './info-column/ProductInfoSection';
 import { getSession } from '@/lib/auth';
 
 interface Props {
-  id: number;
+  id: string;
 }
 
 export const ProductDetail = async ({ id }: Props) => {

@@ -10,13 +10,13 @@ export const parseProductsSearchParams = (
 ): ProductsSearchParams => {
   const rawMinPrice = Number(getSingleSearchParam(searchParams.minPrice));
   const rawMaxPrice = Number(getSingleSearchParam(searchParams.maxPrice));
-  const rawCategory = Number(getSingleSearchParam(searchParams.category));
+  const rawCategory = getSingleSearchParam(searchParams.category);
 
   return {
     query: getSingleSearchParam(searchParams.query) ?? '',
     order: (getSingleSearchParam(searchParams.order) as 'asc' | 'desc') ?? 'desc',
     page: Number(getSingleSearchParam(searchParams.page)) || 1,
-    category: !isNaN(rawCategory) && rawCategory > 0 ? rawCategory : undefined,
+    category: rawCategory && rawCategory.trim() !== '' ? rawCategory : undefined,
     minPrice: !isNaN(rawMinPrice) && rawMinPrice > 0 ? rawMinPrice : undefined,
     maxPrice: !isNaN(rawMaxPrice) && rawMaxPrice > 0 ? rawMaxPrice : undefined,
   };

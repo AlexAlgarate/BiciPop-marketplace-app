@@ -14,7 +14,7 @@ export const generateMetadata = async (props: {
 }): Promise<Metadata> => {
   const { id } = await props.params;
 
-  const product = await getAdById(Number(id));
+  const product = await getAdById(id);
 
   return {
     title: product
@@ -32,7 +32,7 @@ const ProductDetailPage = async (props: { params: ProductDetailParams }) => {
   return (
     <ProductDetailView>
       <Suspense fallback={<SingleProductSkeleton />}>
-        <ProductDetail id={Number(id)} />
+        <ProductDetail id={id} />
       </Suspense>
     </ProductDetailView>
   );

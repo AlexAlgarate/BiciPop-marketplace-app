@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { ContactSellerButton } from './ContactSellerButton';
 
 interface Props {
-  adId: number;
+  adId: string;
   ownerId: string;
 }
 

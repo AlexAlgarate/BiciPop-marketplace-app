@@ -3,7 +3,7 @@ export interface FilterProducts {
   order: 'asc' | 'desc';
   page: number;
   pageSize: number;
-  category?: number;
+  category?: string;
   minPrice?: number;
   maxPrice?: number;
 }

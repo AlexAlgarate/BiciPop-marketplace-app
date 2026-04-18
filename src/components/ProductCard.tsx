@@ -10,7 +10,7 @@ import { Button } from './ui/Button';
 import { timeAgo } from '@/utils/date';
 
 type ProductCardProps = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;

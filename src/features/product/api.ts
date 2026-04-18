@@ -4,7 +4,7 @@ import { mapToAdDTO } from '@/domain/products/mappers';
 import { ProductDTO } from '@/domain/products/types';
 import prisma from '@/lib/prisma';
 
-export const getAdById = cache(async (id: number): Promise<ProductDTO | null> => {
+export const getAdById = cache(async (id: string): Promise<ProductDTO | null> => {
   const ad = await prisma.product.findUnique({
     where: { id },
     include: {
@@ -19,22 +19,22 @@ export const getAdById = cache(async (id: number): Promise<ProductDTO | null> =>
 });
 
 export const getAdByOwner = async (
-  adId: number,
+  adId: string,
   userId: string,
-): Promise<{ id: number } | null> => {
+): Promise<{ id: string } | null> => {
   return prisma.product.findUnique({
     where: { id: adId, userId },
     select: { id: true },
   });
 };
 
-export const deleteAd = async (adId: number) => {
+export const deleteAd = async (adId: string) => {
   return prisma.product.delete({ where: { id: adId } });
 };
 
 export const toggleFavorite = async (
   userId: string,
-  productId: number,
+  productId: string,
 ): Promise<{ liked: boolean; likesCount: number }> => {
   const existingFavorite = await prisma.favorite.findUnique({
     where: {
@@ -72,7 +72,7 @@ export const toggleFavorite = async (
 
 export const getAdWithFavoriteStatus = cache(
   async (
-    id: number,
+    id: string,
     userId: string | null,
   ): Promise<(ProductDTO & { isLiked: boolean; isOwner: boolean }) | null> => {
     const ad = await prisma.product.findUnique({

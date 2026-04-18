@@ -8,7 +8,7 @@ interface AllProductsViewProps {
     toString?: () => string;
     query?: string;
     order?: string;
-    category?: number;
+    category?: string;
     minPrice?: number;
     maxPrice?: number;
   };
