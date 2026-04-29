@@ -7,14 +7,14 @@ export type AdWithFavoriteStatus = ProductDTO & {
   isOwner: boolean;
 };
 
-export const findUsers = async (
+export const findProducts = async (
   whereClause: WhereClause,
   page: number,
   pageSize: number,
   order: 'asc' | 'desc',
   userId: string | null,
-): Promise<{ items: AdWithFavoriteStatus[]; totalProjects: number }> => {
-  const totalProjects = await prisma.product.count({ where: whereClause });
+): Promise<{ items: AdWithFavoriteStatus[]; totalProducts: number }> => {
+  const totlaProducts = await prisma.product.count({ where: whereClause });
 
   const items = await prisma.product.findMany({
     where: whereClause,
@@ -67,5 +67,5 @@ export const findUsers = async (
     }),
   );
 
-  return { items: itemsWithFavoriteStatus, totalProjects };
+  return { items: itemsWithFavoriteStatus, totalProducts: totlaProducts };
 };

@@ -1,7 +1,7 @@
 import { ProductsResultDto } from './types';
 import { getPagination, getWhereClause } from '../shared/utils/build-filters';
 import { FilterProducts } from '../shared/types/filter.types';
-import { findUsers } from '../shared/api/get-products';
+import { findProducts } from '../shared/api/get-products';
 import { getSession } from '@/lib/auth';
 
 export async function getProducts(filters: FilterProducts): Promise<ProductsResultDto> {
@@ -17,7 +17,7 @@ export async function getProducts(filters: FilterProducts): Promise<ProductsResu
   const session = await getSession();
   const userId = session?.userId ?? null;
 
-  const { items, totalProjects } = await findUsers(
+  const { items, totalProducts } = await findProducts(
     whereClause,
     safePage,
     safePageSize,
@@ -25,12 +25,12 @@ export async function getProducts(filters: FilterProducts): Promise<ProductsResu
     userId,
   );
 
-  const totalPages = Math.max(1, Math.ceil(totalProjects / safePageSize));
+  const totalPages = Math.max(1, Math.ceil(totalProducts / safePageSize));
   const currentPage = Math.min(safePage, totalPages);
 
   return {
     items: items as unknown as ProductsResultDto['items'],
-    totalCount: totalProjects,
+    totalCount: totalProducts,
     totalPages,
     currentPage,
   };

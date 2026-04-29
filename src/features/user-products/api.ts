@@ -1,7 +1,7 @@
 import { getSession } from '@/lib/auth';
 import { getPagination, getWhereClause } from '../shared/utils/build-filters';
 import { FilterProducts } from '../shared/types/filter.types';
-import { findUsers } from '../shared/api/get-products';
+import { findProducts } from '../shared/api/get-products';
 
 export const getUserProducts = async (filters: FilterProducts) => {
   const session = await getSession();
@@ -26,7 +26,7 @@ export const getUserProducts = async (filters: FilterProducts) => {
     userId: session.userId,
   };
 
-  const { items, totalProjects } = await findUsers(
+  const { items, totalProducts } = await findProducts(
     whereClause,
     safePage,
     safePageSize,
@@ -34,12 +34,12 @@ export const getUserProducts = async (filters: FilterProducts) => {
     session.userId,
   );
 
-  const totalPages = Math.max(1, Math.ceil(totalProjects / safePageSize));
+  const totalPages = Math.max(1, Math.ceil(totalProducts / safePageSize));
   const currentPage = Math.min(safePage, totalPages);
 
   return {
     items,
-    totalCount: totalProjects,
+    totalCount: totalProducts,
     totalPages,
     currentPage,
   };
